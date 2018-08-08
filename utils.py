@@ -45,6 +45,6 @@ def plot_stats_count(data):
         ax.annotate(value, xy=((b.x0 + b.x1)/2 + x_offset, b.y1 + y_offset))
 
     fig_path = "./ExploreResult/{}-{}.png".format(xlabel, ylabel)
-    plt.savefig(fig_path)
+    plt.savefig(fig_path, dpi=300)
     print("Save figure to ", fig_path)
     plt.show()
