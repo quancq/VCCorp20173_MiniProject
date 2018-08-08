@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExploreDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/explore_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/training_data_4362.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/training_data_4362.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dataset/valid_data_1091.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/valid_data_1091.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +17,11 @@
     <session id="-487142137">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -36,13 +37,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="4616" />
+          <entry key="py" value="4620" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="4616" />
+          <entry key="Python" value="4620" />
         </counts>
       </usages-collector>
     </session>
@@ -52,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/explore_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="437">
               <caret line="27" column="51" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="51" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -64,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
+            <state relative-caret-position="19">
               <caret line="2" selection-start-line="2" selection-end-line="2" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -76,19 +77,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="429">
+              <caret line="156" selection-start-line="156" selection-end-line="156" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
-                <element signature="e#914#1730#0" />
-                <element signature="e#2147#2894#0" />
-                <marker date="1533749303302" expanded="true" signature="247:252" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="590:595" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="647:934" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="1832:1837" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="2195:4271" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="3060:3219" ph="..." />
-                <marker date="1533749303302" expanded="true" signature="3255:3580" ph="..." />
+                <marker date="1533750414645" expanded="true" signature="247:252" ph="..." />
+                <marker date="1533750414645" expanded="true" signature="590:595" ph="..." />
+                <marker date="1533750414645" expanded="true" signature="647:934" ph="..." />
+                <marker date="1533750414645" expanded="true" signature="1832:1837" ph="..." />
               </folding>
             </state>
           </provider>
@@ -237,7 +233,7 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1366" height="709" extended-state="6" />
+    <frame x="-1" y="-11" width="1368" height="717" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16604617" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -261,7 +257,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/explore_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="437">
           <caret line="27" column="51" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="51" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -271,7 +267,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
+        <state relative-caret-position="19">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -281,19 +277,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="429">
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
-            <element signature="e#914#1730#0" />
-            <element signature="e#2147#2894#0" />
-            <marker date="1533749303302" expanded="true" signature="247:252" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="590:595" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="647:934" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="1832:1837" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="2195:4271" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="3060:3219" ph="..." />
-            <marker date="1533749303302" expanded="true" signature="3255:3580" ph="..." />
+            <marker date="1533750414645" expanded="true" signature="247:252" ph="..." />
+            <marker date="1533750414645" expanded="true" signature="590:595" ph="..." />
+            <marker date="1533750414645" expanded="true" signature="647:934" ph="..." />
+            <marker date="1533750414645" expanded="true" signature="1832:1837" ph="..." />
           </folding>
         </state>
       </provider>

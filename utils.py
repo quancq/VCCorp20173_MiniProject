@@ -149,8 +149,8 @@ if __name__ == "__main__":
     # Save splitted data
     training_path = "./Dataset/training_data_{}.json".format(len(training_data))
     with open(training_path, 'w', encoding="utf-8") as f:
-        json.dump(training_data, f)
+        json.dump(training_data, f, ensure_ascii=False)
 
     valid_path = "./Dataset/valid_data_{}.json".format(len(valid_data))
     with open(valid_path, 'w', encoding="utf-8") as f:
-        json.dump(valid_data, f)
+        json.dump(valid_data, f, ensure_ascii=False)
