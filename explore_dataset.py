@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     print("========================================")
 
-    training_df = utils.convert_dicts_to_df(training_data)
+    training_df = utils.convert_original_data_to_df(training_data)
 
     print(training_df.info())
 
