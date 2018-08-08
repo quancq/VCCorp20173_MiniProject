@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="" />
+    <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExploreDataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/explore_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,39 +17,43 @@
     <session id="-487142137">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="2" />
+          <entry key="py" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="2" />
+          <entry key="Python" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2083" />
+          <entry key="dummy" value="5" />
+          <entry key="py" value="4616" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2083" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="4616" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ExploreDataset.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/explore_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+            <state relative-caret-position="102">
+              <caret line="27" column="51" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="51" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -53,16 +62,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/preprocessing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="25">
+              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
-                <marker date="1533728676306" expanded="true" signature="126:131" ph="..." />
-                <marker date="1533728676306" expanded="true" signature="461:466" ph="..." />
-                <marker date="1533728676306" expanded="true" signature="505:510" ph="..." />
-                <marker date="1533728676306" expanded="true" signature="505:1318" ph="..." />
+                <element signature="e#914#1730#0" />
+                <element signature="e#2147#2894#0" />
+                <marker date="1533749303302" expanded="true" signature="247:252" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="590:595" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="647:934" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="1832:1837" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="2195:4271" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="3060:3219" ph="..." />
+                <marker date="1533749303302" expanded="true" signature="3255:3580" ph="..." />
               </folding>
             </state>
           </provider>
@@ -83,8 +109,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/ExploreDataset.py" />
+        <option value="$PROJECT_DIR$/preprocessing.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
@@ -129,7 +156,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.utils">
     <configuration name="ExploreDataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MiniProject_VCCorp20173" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -142,7 +169,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ExploreDataset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/explore_dataset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,8 +178,57 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="preprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MiniProject_VCCorp20173" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MiniProject_VCCorp20173" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.ExploreDataset" />
+      <item itemvalue="Python.preprocessing" />
+      <item itemvalue="Python.utils" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.utils" />
+        <item itemvalue="Python.preprocessing" />
         <item itemvalue="Python.ExploreDataset" />
       </list>
     </recent_temporary>
@@ -161,20 +237,19 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="717" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="-4" width="1366" height="709" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19583023" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16604617" />
       <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31034482" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32019705" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -184,26 +259,41 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils.py">
+    <entry file="file://$PROJECT_DIR$/explore_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        <state relative-caret-position="102">
+          <caret line="27" column="51" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="51" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
-            <marker date="1533728676306" expanded="true" signature="126:131" ph="..." />
-            <marker date="1533728676306" expanded="true" signature="461:466" ph="..." />
-            <marker date="1533728676306" expanded="true" signature="505:510" ph="..." />
-            <marker date="1533728676306" expanded="true" signature="505:1318" ph="..." />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExploreDataset.py">
+    <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#914#1730#0" />
+            <element signature="e#2147#2894#0" />
+            <marker date="1533749303302" expanded="true" signature="247:252" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="590:595" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="647:934" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="1832:1837" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="2195:4271" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="3060:3219" ph="..." />
+            <marker date="1533749303302" expanded="true" signature="3255:3580" ph="..." />
           </folding>
         </state>
       </provider>
