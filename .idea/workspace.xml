@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dataset/training_data_4362.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/training_data_4362.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dataset/valid_data_1091.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dataset/valid_data_1091.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,33 +17,35 @@
     <session id="-487142137">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="3" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="3" />
+          <entry key="Python" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="4620" />
+          <entry key="py" value="7661" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="4620" />
+          <entry key="Python" value="7661" />
         </counts>
       </usages-collector>
     </session>
@@ -65,8 +67,37 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="266">
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <marker date="1533839825128" expanded="true" signature="209:273" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1696">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+                <marker date="1533779673885" expanded="true" signature="264:269" ph="..." />
+                <marker date="1533779673885" expanded="true" signature="607:612" ph="..." />
+                <marker date="1533779673885" expanded="true" signature="664:951" ph="..." />
+                <marker date="1533779673885" expanded="true" signature="1849:1854" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/temp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -75,16 +106,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/utils.py">
+        <entry file="file://$PROJECT_DIR$/ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="156" selection-start-line="156" selection-end-line="156" />
+            <state relative-caret-position="173">
+              <caret line="60" column="77" selection-start-line="60" selection-start-column="77" selection-end-line="60" selection-end-column="77" />
               <folding>
-                <element signature="e#0#27#0" expanded="true" />
-                <marker date="1533750414645" expanded="true" signature="247:252" ph="..." />
-                <marker date="1533750414645" expanded="true" signature="590:595" ph="..." />
-                <marker date="1533750414645" expanded="true" signature="647:934" ph="..." />
-                <marker date="1533750414645" expanded="true" signature="1832:1837" ph="..." />
+                <element signature="e#0#18#0" expanded="true" />
+                <marker date="1533842234286" expanded="true" signature="416:562" ph="..." />
               </folding>
             </state>
           </provider>
@@ -106,8 +134,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ExploreDataset.py" />
-        <option value="$PROJECT_DIR$/preprocessing.py" />
         <option value="$PROJECT_DIR$/utils.py" />
+        <option value="$PROJECT_DIR$/temp.py" />
+        <option value="$PROJECT_DIR$/preprocessing.py" />
+        <option value="$PROJECT_DIR$/ml_model.py" />
       </list>
     </option>
   </component>
@@ -152,7 +182,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python.ml_model">
     <configuration name="ExploreDataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MiniProject_VCCorp20173" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -174,6 +204,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="ml_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MiniProject_VCCorp20173" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ml_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="preprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MiniProject_VCCorp20173" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,6 +238,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MiniProject_VCCorp20173" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/temp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -220,9 +292,13 @@
       <item itemvalue="Python.ExploreDataset" />
       <item itemvalue="Python.preprocessing" />
       <item itemvalue="Python.utils" />
+      <item itemvalue="Python.temp" />
+      <item itemvalue="Python.ml_model" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ml_model" />
+        <item itemvalue="Python.temp" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.preprocessing" />
         <item itemvalue="Python.ExploreDataset" />
@@ -239,7 +315,7 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32019705" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.47454843" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -265,10 +341,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing.py">
+    <entry file="file://$PROJECT_DIR$/temp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="437">
+          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -277,14 +353,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="156" selection-start-line="156" selection-end-line="156" />
+        <state relative-caret-position="-1696">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
-            <marker date="1533750414645" expanded="true" signature="247:252" ph="..." />
-            <marker date="1533750414645" expanded="true" signature="590:595" ph="..." />
-            <marker date="1533750414645" expanded="true" signature="647:934" ph="..." />
-            <marker date="1533750414645" expanded="true" signature="1832:1837" ph="..." />
+            <marker date="1533779673885" expanded="true" signature="264:269" ph="..." />
+            <marker date="1533779673885" expanded="true" signature="607:612" ph="..." />
+            <marker date="1533779673885" expanded="true" signature="664:951" ph="..." />
+            <marker date="1533779673885" expanded="true" signature="1849:1854" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1533839825128" expanded="true" signature="209:273" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ml_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="60" column="77" selection-start-line="60" selection-start-column="77" selection-end-line="60" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1533842234286" expanded="true" signature="416:562" ph="..." />
           </folding>
         </state>
       </provider>
