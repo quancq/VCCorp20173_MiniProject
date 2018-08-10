@@ -11,7 +11,7 @@ import itertools
 def load_data(file_path):
     with open(file_path, 'r', encoding="utf-8") as f:
         data = json.load(f)
-    print("Read file {} done".format(file_path))
+    print("Read file {} done. Data size : {}".format(file_path, len(data)))
     return data
 
 
