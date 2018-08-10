@@ -16,9 +16,10 @@ import warnings
 
 
 class EnsembleModel:
-    def __init__(self, scoring):
+    def __init__(self, scoring, vocab_path):
         self.scoring = scoring
         self.models = {}
+        self.vocab_path = vocab_path
         self.feature_transformer = FeatureTransformer()
 
     def add_model(self, name, estimator):
@@ -31,10 +32,9 @@ class EnsembleModel:
 
     def fit(self, X, y):
         # Transform raw document to document presentation
-        X = self.feature_transformer.fit_transform(X, y)
-        self.vocab = self.feature_transformer.get_vocab()
+        X = self.feature_transformer.fit_transform(X, y, vocab_path=self.vocab_path)
+        self.vocab = self.feature_transformer.get_tfidf_vocab()
         print("Vocabulary size : ", len(self.vocab))
-        utils.write_vocab(self.vocab, "./ExploreResult/vocab.txt")
 
         for name, model in self.models.items():
             model["estimator"].fit(X, y)
@@ -66,13 +66,15 @@ class EnsembleModel:
             print("Best valid {} score  : {}".format(self.scoring[0], instance.best_score_))
             best_index = instance.best_index_
             for score in self.scoring:
-                print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
+                if score != self.scoring[0]:
+                    print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
         print("===============================\n")
 
 
 if __name__ == "__main__":
     warnings.filterwarnings("once")
 
+    vocab_path = "./ExploreResult/vocab_17329.csv"
     training_data_path = "./Dataset/data_train.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
@@ -81,7 +83,7 @@ if __name__ == "__main__":
     cv = 2
     random_state = 7
 
-    model = EnsembleModel(scoring)
+    model = EnsembleModel(scoring, vocab_path)
 
     # Multinomial Naive Bayes
     # mnb_gs = GridSearchCV(

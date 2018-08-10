@@ -8,6 +8,19 @@ from sklearn.model_selection import train_test_split
 import itertools
 
 
+def upper(s):
+
+    if isinstance(s, type(u"")):
+        return s.upper()
+    return str(s, "utf8").upper().encode("utf8")
+
+
+def lower(s):
+    if isinstance(s, type(u"")):
+        return s.lower()
+    return str(s, "utf8").lower().encode("utf8")
+
+
 def load_data(file_path):
     with open(file_path, 'r', encoding="utf-8") as f:
         data = json.load(f)
@@ -61,7 +74,7 @@ def plot_stats_count(data):
     for p in ax.patches:
         b = p.get_bbox()
         value = int(b.y1)
-        ax.annotate(value, xy=((b.x0 + b.x1)/2 + x_offset, b.y1 + y_offset))
+        ax.annotate(value, xy=((b.x0 + b.x1) / 2 + x_offset, b.y1 + y_offset))
 
     fig_path = "./ExploreResult/{}-{}.png".format(xlabel, ylabel)
     plt.savefig(fig_path, dpi=300)
@@ -81,9 +94,9 @@ def write_sample_dataset(data, num_samples=5):
 
 def plot_word_cloud(corpus, file_path):
     # mpl.rcParams['figure.figsize']=(8.0,6.0)    #(6.0,4.0)
-    mpl.rcParams['font.size']=12                #10
-    mpl.rcParams['savefig.dpi']=100             #72
-    mpl.rcParams['figure.subplot.bottom']=.1
+    mpl.rcParams['font.size'] = 12  # 10
+    mpl.rcParams['savefig.dpi'] = 100  # 72
+    mpl.rcParams['figure.subplot.bottom'] = .1
 
     stopwords = set(STOPWORDS)
     print("Stopword size : ", len(stopwords))
@@ -94,7 +107,7 @@ def plot_word_cloud(corpus, file_path):
         # max_words=200,
         max_font_size=40,
         random_state=42
-        ).generate(corpus)
+    ).generate(corpus)
 
     print(wordcloud)
     fig = plt.figure(1)
@@ -170,28 +183,6 @@ def split_data(data, test_size=0.2):
     return training_data, valid_data
 
 
-if __name__ == "__main__":
-    training_file_path = "./Dataset/data_train.json"
-    test_file_path = "./Dataset/data_sent.json"
-
-    training_data = load_data(training_file_path)
-    training_size = len(training_data)
-    test_data = load_data(test_file_path)
-    test_size = len(test_data)
-
-    # training_data = convert_original_data_to_dict(training_data)
-    training_data, valid_data = split_data(training_data)
-
-    # Save splitted data
-    training_path = "./Dataset/training_data_{}.json".format(len(training_data))
-    with open(training_path, 'w', encoding="utf-8") as f:
-        json.dump(training_data, f, ensure_ascii=False)
-
-    valid_path = "./Dataset/valid_data_{}.json".format(len(valid_data))
-    with open(valid_path, 'w', encoding="utf-8") as f:
-        json.dump(valid_data, f, ensure_ascii=False)
-
-
 def write_vocab(vocab, save_path):
     words = list(vocab.keys())
     words.sort()
@@ -200,3 +191,17 @@ def write_vocab(vocab, save_path):
         f.write("\n".join(words))
 
     print("Write vocab (size = {}) to {} done".format(len(words), save_path))
+
+
+if __name__ == "__main__":
+    # training_file_path = "./Dataset/data_train.json"
+    # test_file_path = "./Dataset/data_sent.json"
+    #
+    # training_data = load_data(training_file_path)
+    # training_size = len(training_data)
+    # test_data = load_data(test_file_path)
+    # test_size = len(test_data)
+
+    words = ["Và", "CÓ", "ĐưỢc", "KhÔnG", "Ộ uẾ qUá NặnG", "Ả á à Ê"]
+    for word in words:
+        print("Original word : {} - Lower : {} - Upper : {}".format(word, lower(word), upper(word)))
