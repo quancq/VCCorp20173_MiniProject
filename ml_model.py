@@ -2,14 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import utils
 from collections import Counter
+
 from preprocessing import FeatureTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
+
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import GridSearchCV
 
 import warnings
-warnings.filterwarnings("ignore")
 
 
 class EnsembleModel:
@@ -29,6 +32,10 @@ class EnsembleModel:
     def fit(self, X, y):
         # Transform raw document to document presentation
         X = self.feature_transformer.fit_transform(X, y)
+        self.vocab = self.feature_transformer.get_vocab()
+        print("Vocabulary size : ", len(self.vocab))
+        utils.write_vocab(self.vocab, "./ExploreResult/vocab.txt")
+
         for name, model in self.models.items():
             model["estimator"].fit(X, y)
             print("Model {} fit done".format(name))
@@ -54,48 +61,85 @@ class EnsembleModel:
         print("Statistic : ")
         for name, model in self.models.items():
             instance = model["estimator"]
-            print("Model : ", name)
+            print("\nModel : ", name)
             print("Best params : ", instance.best_params_)
-            print("Best score  : {}".format(instance.best_score_))
+            print("Best valid {} score  : {}".format(self.scoring[0], instance.best_score_))
+            best_index = instance.best_index_
             for score in self.scoring:
-                print("Mean {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)]))
+                print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
         print("===============================\n")
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings("once")
+
     training_data_path = "./Dataset/data_train.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
-    scoring = ["f1_macro", "accuracy"]
+    scoring = ["f1_macro", "f1_micro", "accuracy"]
     cv = 2
+    random_state = 7
+
     model = EnsembleModel(scoring)
 
     # Multinomial Naive Bayes
-    mnb_gs = GridSearchCV(
-        MultinomialNB(),
-        param_grid={"alpha": np.arange(0.8, 1, 0.3)},
-        scoring=scoring,
-        refit=scoring[0],
-        cv=cv,
-        return_train_score=True
-    )
-    model.add_model("MultinomialNB", mnb_gs)
+    # mnb_gs = GridSearchCV(
+    #     MultinomialNB(),
+    #     param_grid={"alpha": np.arange(0.8, 1, 0.3)},
+    #     scoring=scoring,
+    #     refit=scoring[0],
+    #     cv=cv,
+    #     return_train_score=False
+    # )
+    # model.add_model("MultinomialNB", mnb_gs)
 
     # Random Forest
-    rf_gs = GridSearchCV(
+    rf_gs = RandomizedSearchCV(
         RandomForestClassifier(),
-        param_grid={
-            "max_features": np.linspace(0.6, 1, 1),
-            "n_estimators": np.arange(15, 30, 40),
+        param_distributions={
+            "max_features": np.linspace(0.2, 1, 10),
+            "n_estimators": np.arange(15, 90, 20),
             # "min_samples_leaf": np.arange(2, 20, 5),
-            # "max_depth": np.arange(30, 80, 30)
+            "max_depth": np.arange(30, 80, 10)
         },
+        n_iter=3,
         scoring=scoring,
         refit=scoring[0],
         cv=cv,
-        return_train_score=True
+        return_train_score=False,
+        random_state=random_state
     )
     model.add_model("RandomForest", rf_gs)
+
+    linear_svm_gs = RandomizedSearchCV(
+        estimator=LinearSVC(),
+        param_distributions={
+            "C": np.arange(0.03, 1, 0.1)
+        },
+        n_iter=3,
+        scoring=scoring,
+        refit=scoring[0],
+        cv=cv,
+        return_train_score=False,
+        random_state=random_state
+    )
+    model.add_model("Linear SVM", linear_svm_gs)
+
+    # kernel_svm_gs = RandomizedSearchCV(
+    #     estimator=SVC(),
+    #     param_distributions={
+    #         "C": np.arange(0.03, 1, 0.1),
+    #         "gamma": np.arange(0.01, 1, 0.03),
+    #         "kernel": ["rbf"]
+    #     },
+    #     n_iter=4,
+    #     scoring=scoring,
+    #     refit=scoring[0],
+    #     cv=cv,
+    #     return_train_score=False,
+    #     random_state=random_state
+    # )
+    # model.add_model("KernelSVM", kernel_svm_gs)
 
     model.fit(X_train, y_train)

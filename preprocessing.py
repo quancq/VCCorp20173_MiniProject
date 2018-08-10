@@ -14,3 +14,6 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         return self.tfidf.transform(X)
+
+    def get_vocab(self):
+        return self.tfidf.vocabulary_

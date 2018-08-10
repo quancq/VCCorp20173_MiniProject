@@ -190,3 +190,13 @@ if __name__ == "__main__":
     valid_path = "./Dataset/valid_data_{}.json".format(len(valid_data))
     with open(valid_path, 'w', encoding="utf-8") as f:
         json.dump(valid_data, f, ensure_ascii=False)
+
+
+def write_vocab(vocab, save_path):
+    words = list(vocab.keys())
+    words.sort()
+
+    with open(save_path, 'w', encoding="utf-8") as f:
+        f.write("\n".join(words))
+
+    print("Write vocab (size = {}) to {} done".format(len(words), save_path))
