@@ -5,21 +5,25 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re, os, time
 from pyvi import ViTokenizer
-from stop_words import STOP_WORDS
+from stop_words import STOP_WORDS as vi_stop_words
+from nltk.corpus import stopwords
 import string
 from collections import Counter
 
-MAX_WORD_LENGTH = 30
+MAX_WORD_LENGTH = 20
+MIN_WORD_LENGTH = 2
 NUM_LABELS = 22
+MIN_OCCURRENCES_TOKEN = 3
 
 
 class FeatureTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, min_occurrences_of_token=3, max_labels_of_token=NUM_LABELS * 0.5):
+    def __init__(self, min_occurrences_of_token=MIN_OCCURRENCES_TOKEN, max_labels_of_token=NUM_LABELS * 0.5):
         self.tokenize = ViTokenizer.tokenize
         # Retain alpha character, underscore and white space in documents
-        self.re = re.compile(r"[^\w\s]|[0-9]")
+        self.re = re.compile(r"[^\w\s]|[0-9_]")
         self.min_occurrences_of_token = min_occurrences_of_token
         self.max_labels_of_token = max_labels_of_token
+        self.en_stop_words = set(stopwords.words('english'))
 
     def fit(self, X, y, **fit_params):
         vocab_path = fit_params.get("vocab_path")
@@ -45,6 +49,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         return self.tfidf.vocabulary_
 
     def preprocess(self, docs):
+        start_time = time.time()
         print("Start Preprocess {} docs ...".format(len(docs)))
         result = []
         for i, doc in enumerate(docs):
@@ -53,8 +58,8 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
             if (i+1) % 300 == 0:
                 print("Preprocess ({}/{}) docs done".format(i + 1, len(docs)))
 
-        # docs = [self.tokenize(doc) for doc in docs]
-        print("Preprocess {} docs done".format(len(docs)))
+        finish_time = time.time()
+        print("Preprocess {} docs done. Time : {} seconds".format(len(docs), (finish_time - start_time)))
         return result
 
     def clean_doc(self, doc):
@@ -62,7 +67,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         cleaned_doc = []
         doc = self.re.sub('', doc)
         for word in doc.strip().split():
-            if len(word) < MAX_WORD_LENGTH:
+            if MIN_WORD_LENGTH <= len(word) <= MAX_WORD_LENGTH and word not in self.en_stop_words:
                 cleaned_doc.append(utils.lower(word))
 
         return " ".join(cleaned_doc)
@@ -99,7 +104,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
             if num_labels_of_token <= max_labels_of_token and \
                     num_occurrence_of_token >= min_occurrences_of_token and \
-                    token not in STOP_WORDS:
+                    token not in vi_stop_words:
                 vocab_data.append((token, num_labels_of_token, num_occurrence_of_token))
                 vocab.update({token: vocab_size})
                 vocab_size += 1
@@ -115,7 +120,8 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
         return vocab
 
-    def save_vocab(self, dir="./ExploreResult"):
+    def save_vocab(self, dir="./Vocabulary"):
+        utils.mkdirs(dir)
         path = os.path.join(dir, "vocab_{}.csv".format(self.vocab_stats_df.shape[0]))
         self.vocab_stats_df.sort_values("Num_Occurrences", ascending=False, inplace=True)
         self.vocab_stats_df.to_csv(path, index=False)
@@ -130,7 +136,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
             num_occurrence_of_token = row["Num_Occurrences"]
             if num_labels_of_token <= max_labels_of_token and \
                     num_occurrence_of_token >= min_occurrences_of_token and \
-                    token not in STOP_WORDS:
+                    token not in vi_stop_words:
                 self.vocab.update({token: i})
 
         print("Load vocabulary (size = {}) from {} done".format(len(self.vocab), path))
@@ -139,9 +145,12 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
     def print_stats_vocab(self, num_records=5):
         print("\n Statistic full vocabulary - top ", num_records)
         print(self.vocab_stats_df.head(num_records))
+        print("Mean number occurrences of each token : ", self.vocab_stats_df["Num_Occurrences"].mean())
+        print("Mean number labels of each token      : ", self.vocab_stats_df["Num_Labels"].mean())
+
         print("\nFull vocabulary size : ", self.vocab_stats_df.shape[0])
         print("Use vocabulary size    : ", len(self.vocab))
-        print("Tf-idf vocabulary size : ", len(self.get_tfidf_vocab()))
+        # print("Tf-idf vocabulary size : ", len(self.get_tfidf_vocab()))
 
         # print("Và :", self.vocab.get("và"), self.vocab.get("Và"))
         # print("Là :", self.vocab.get("là"), self.vocab.get("Là"))
@@ -153,10 +162,11 @@ if __name__ == "__main__":
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
+    # Generate new vocabulary
     min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
     ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
     ft.fit(X_train, y_train)
-    vocab_dir = "./ExploreResult/"
+    vocab_dir = "./Vocabulary/"
     ft.save_vocab(vocab_dir)
     ft.print_stats_vocab(10)
     # vocab = ft.get_tfidf_vocab()

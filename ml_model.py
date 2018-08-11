@@ -1,14 +1,16 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import utils
 from collections import Counter
-
+import time, os, json
+from datetime import datetime
 from preprocessing import FeatureTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.svm import SVC
-
+from sklearn.externals import joblib
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import GridSearchCV
 
@@ -37,11 +39,14 @@ class EnsembleModel:
         print("Vocabulary size : ", len(self.vocab))
 
         for name, model in self.models.items():
+            start_time = time.time()
             model["estimator"].fit(X, y)
-            print("Model {} fit done".format(name))
+            finish_time = time.time()
+            print("Model {} fit done. Time : {:.4f} seconds".format(name, (finish_time - start_time)))
         self.print_stat_fit()
 
     def predict(self, X):
+        start_time = time.time()
         X = self.feature_transformer.transform(X)
         total_preds = []
         for name, model in self.models.items():
@@ -54,6 +59,8 @@ class EnsembleModel:
         for i, preds in enumerate(total_preds):
             self.major_votings[i], _ = Counter(preds).most_common(1)[0]
 
+        finish_time = time.time()
+        print("Model predict done. Time : {:.4f} seconds".format(finish_time - start_time))
         return self.major_votings
 
     def print_stat_fit(self):
@@ -70,13 +77,102 @@ class EnsembleModel:
                     print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
         print("===============================\n")
 
+    def get_data_plot(self):
+        data_plot = []
+        columns = ["Model"] + self.scoring
+        for name, model in self.models.items():
+            row = [name]
+            instance = model["estimator"]
+            row.append(instance.best_score_)
+            best_index = instance.best_index_
+            for score in self.scoring:
+                if score != self.scoring[0]:
+                    row.append(instance.cv_results_["mean_test_{}".format(score)][best_index])
+            data_plot.append(row)
+
+        data_plot = pd.DataFrame(data_plot, columns=columns)
+        return data_plot
+
+    def save_model(self, save_dir="./Model"):
+        print("Start to save {} models to {} ...".format(len(self.models), save_dir))
+        dt = datetime.now()
+        save_dir = os.path.join(save_dir, dt.strftime("%Y-%m-%d_%H-%M-%S"))
+        utils.mkdirs(save_dir)
+        meta_data = []
+
+        for name, model in self.models.items():
+            instance = model["estimator"]
+            save_path = os.path.join(save_dir, "{}.joblib".format(name))
+            joblib.dump(instance, save_path)
+            meta_data.append({
+                "model_name": name,
+                "model_path": save_path,
+                "model_params": instance.best_params_
+            })
+            print("Save model {} to {} done".format(name, save_path))
+
+        # Save meta data about models
+        meta_data_path = os.path.join(save_dir, "meta.txt")
+        with open(meta_data_path, 'w') as f:
+            json.dump(meta_data, f)
+
+        print("Save {} models to {} done".format(len(self.models), save_dir))
+
+        # Save figure about training result of models
+        # Create data frame contains result
+        data_plot = self.get_data_plot()
+
+        # Plot and save figure
+        save_plot_dir = os.path.join(save_dir, "Statistic_Figure")
+        self.plot_result(data_plot, save_plot_dir, is_plot=True)
+
+    def load_model(self, save_dir):
+        print("Start to load models from ", save_dir)
+        meta_data_path = os.path.join(save_dir, "meta.txt")
+        # Load meta data about models
+        with open(meta_data_path, 'r') as f:
+            meta_data = json.load(f)
+        self.models = {}
+        for info_model in meta_data:
+            model_name = info_model["model_name"]
+            model_path = info_model["model_path"]
+            estimator = joblib.load(model_path)
+            self.models.update({
+                model_name: {
+                    "estimator": estimator,
+                    "pred": []
+                }
+            })
+        self.feature_transformer.fit([0], [0], vocab_path=self.vocab_path)
+        print("Load {} models from {} done".format(len(self.models), save_dir))
+
+    def plot_result(self, data_plot, save_fig_dir, is_plot=True):
+        utils.mkdirs(save_fig_dir)
+        columns = list(data_plot.columns)
+        print("Start to plot and save {} figures to {} ...".format(len(columns) - 1, save_fig_dir))
+
+        print("Head of data plot")
+        print(data_plot.head())
+
+        model_column = columns[0]
+        for score_solumn in columns[1:]:
+            ax = data_plot.plot(kind="bar", x=model_column, y=score_solumn)
+            title = "Mean " + score_solumn + " score cross validation"
+            ax.set(title=title, xlabel=model_column, ylabel=score_solumn)
+            save_fig_path = os.path.join(save_fig_dir, "{}.png".format(score_solumn))
+            plt.savefig(save_fig_path, dpi=800)
+
+        print("Plot and save {} figures to {} done".format(len(columns) - 1, save_fig_dir))
+        if is_plot:
+            plt.show()
+
 
 if __name__ == "__main__":
     warnings.filterwarnings("once")
 
-    vocab_path = "./ExploreResult/vocab_17329.csv"
+    vocab_path = "./Vocabulary/vocab_17012.csv"
     training_data_path = "./Dataset/data_train.json"
-    training_data = utils.load_data(training_data_path)
+    training_data = utils.load_data(training_data_path)[:1000]
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
     scoring = ["f1_macro", "f1_micro", "accuracy"]
@@ -86,21 +182,21 @@ if __name__ == "__main__":
     model = EnsembleModel(scoring, vocab_path)
 
     # Multinomial Naive Bayes
-    # mnb_gs = GridSearchCV(
-    #     MultinomialNB(),
-    #     param_grid={"alpha": np.arange(0.8, 1, 0.3)},
-    #     scoring=scoring,
-    #     refit=scoring[0],
-    #     cv=cv,
-    #     return_train_score=False
-    # )
-    # model.add_model("MultinomialNB", mnb_gs)
+    mnb_gs = GridSearchCV(
+        MultinomialNB(),
+        param_grid={"alpha": np.arange(0.3, 1, 0.3)},
+        scoring=scoring,
+        refit=scoring[0],
+        cv=cv,
+        return_train_score=False
+    )
+    model.add_model("MultinomialNB", mnb_gs)
 
     # Random Forest
     rf_gs = RandomizedSearchCV(
         RandomForestClassifier(),
         param_distributions={
-            "max_features": np.linspace(0.2, 1, 10),
+            "max_features": np.linspace(0.1, 1, 10),
             "n_estimators": np.arange(15, 90, 20),
             # "min_samples_leaf": np.arange(2, 20, 5),
             "max_depth": np.arange(30, 80, 10)
@@ -112,7 +208,7 @@ if __name__ == "__main__":
         return_train_score=False,
         random_state=random_state
     )
-    model.add_model("RandomForest", rf_gs)
+    # model.add_model("RandomForest", rf_gs)
 
     linear_svm_gs = RandomizedSearchCV(
         estimator=LinearSVC(),
@@ -144,4 +240,8 @@ if __name__ == "__main__":
     # )
     # model.add_model("KernelSVM", kernel_svm_gs)
 
+    # Train model
     model.fit(X_train, y_train)
+
+    # Save model
+    model.save_model()

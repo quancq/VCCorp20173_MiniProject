@@ -1,0 +1,1 @@
+[{"model_path": "./Model/2018-08-11_12-47-12/Linear SVM.joblib", "model_name": "Linear SVM", "model_params": {"C": 0.8300000000000001}}, {"model_path": "./Model/2018-08-11_12-47-12/MultinomialNB.joblib", "model_name": "MultinomialNB", "model_params": {"alpha": 0.3}}]

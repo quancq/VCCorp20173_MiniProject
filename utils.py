@@ -193,6 +193,12 @@ def write_vocab(vocab, save_path):
     print("Write vocab (size = {}) to {} done".format(len(words), save_path))
 
 
+def mkdirs(dir_path):
+    if not os.path.exists(dir_path):
+        print("Create new directory : ", dir_path)
+        os.makedirs(dir_path)
+
+
 if __name__ == "__main__":
     # training_file_path = "./Dataset/data_train.json"
     # test_file_path = "./Dataset/data_sent.json"
