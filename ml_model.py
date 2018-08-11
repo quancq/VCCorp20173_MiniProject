@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import utils
 from collections import Counter
@@ -18,7 +19,8 @@ import warnings
 
 
 class EnsembleModel:
-    def __init__(self, scoring, vocab_path):
+    def __init__(self, scoring, vocab_path, cv):
+        self.cv = cv
         self.scoring = scoring
         self.models = {}
         self.vocab_path = vocab_path
@@ -113,8 +115,9 @@ class EnsembleModel:
 
         # Save meta data about models
         meta_data_path = os.path.join(save_dir, "meta.txt")
+        # print("\nMeta data : ", meta_data)
         with open(meta_data_path, 'w') as f:
-            json.dump(meta_data, f)
+            json.dump(meta_data, f, cls=utils.MyEncoder)
 
         print("Save {} models to {} done".format(len(self.models), save_dir))
 
@@ -153,12 +156,31 @@ class EnsembleModel:
 
         print("Head of data plot")
         print(data_plot.head())
+        x_offset = 0.03
+        y_offset = 0.01
+        mpl.style.use("seaborn")
 
         model_column = columns[0]
         for score_solumn in columns[1:]:
-            ax = data_plot.plot(kind="bar", x=model_column, y=score_solumn)
-            title = "Mean " + score_solumn + " score cross validation"
+            # Sort by ascending score
+            data_plot.sort_values(score_solumn, ascending=True, inplace=True)
+
+            ax = data_plot.plot(kind="bar", x=model_column, y=score_solumn,
+                                legend=None, color='C1', figsize=(5, 4), width=0.3)
+            title = "Mean {} score - {} cross validation".format(score_solumn, self.cv)
             ax.set(title=title, xlabel=model_column, ylabel=score_solumn)
+            ax.tick_params(axis='x', rotation=0)
+
+            min_score = data_plot.loc[:, score_solumn].min()
+            y_lim_min = (min_score - 0.2) if min_score > 0.2 else 0
+            ax.set_ylim([y_lim_min, 1])
+
+            # Show value of each column to see clearly
+            for p in ax.patches:
+                b = p.get_bbox()
+                text_value = "{:.4f}".format(b.y1)
+                ax.annotate(text_value, xy=(b.x0 + x_offset, b.y1 + y_offset))
+
             save_fig_path = os.path.join(save_fig_dir, "{}.png".format(score_solumn))
             plt.savefig(save_fig_path, dpi=800)
 
@@ -172,19 +194,19 @@ if __name__ == "__main__":
 
     vocab_path = "./Vocabulary/vocab_17012.csv"
     training_data_path = "./Dataset/data_train.json"
-    training_data = utils.load_data(training_data_path)[:1000]
+    training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
     scoring = ["f1_macro", "f1_micro", "accuracy"]
-    cv = 2
+    cv = 3
     random_state = 7
 
-    model = EnsembleModel(scoring, vocab_path)
+    model = EnsembleModel(scoring, vocab_path, cv)
 
     # Multinomial Naive Bayes
     mnb_gs = GridSearchCV(
         MultinomialNB(),
-        param_grid={"alpha": np.arange(0.3, 1, 0.3)},
+        param_grid={"alpha": np.linspace(0.1, 1, 5)},
         scoring=scoring,
         refit=scoring[0],
         cv=cv,
@@ -201,21 +223,21 @@ if __name__ == "__main__":
             # "min_samples_leaf": np.arange(2, 20, 5),
             "max_depth": np.arange(30, 80, 10)
         },
-        n_iter=3,
+        n_iter=5,
         scoring=scoring,
         refit=scoring[0],
         cv=cv,
         return_train_score=False,
         random_state=random_state
     )
-    # model.add_model("RandomForest", rf_gs)
+    model.add_model("RandomForest", rf_gs)
 
     linear_svm_gs = RandomizedSearchCV(
         estimator=LinearSVC(),
         param_distributions={
-            "C": np.arange(0.03, 1, 0.1)
+            "C": np.linspace(0.01, 1, 10)
         },
-        n_iter=3,
+        n_iter=5,
         scoring=scoring,
         refit=scoring[0],
         cv=cv,
@@ -224,21 +246,21 @@ if __name__ == "__main__":
     )
     model.add_model("Linear SVM", linear_svm_gs)
 
-    # kernel_svm_gs = RandomizedSearchCV(
-    #     estimator=SVC(),
-    #     param_distributions={
-    #         "C": np.arange(0.03, 1, 0.1),
-    #         "gamma": np.arange(0.01, 1, 0.03),
-    #         "kernel": ["rbf"]
-    #     },
-    #     n_iter=4,
-    #     scoring=scoring,
-    #     refit=scoring[0],
-    #     cv=cv,
-    #     return_train_score=False,
-    #     random_state=random_state
-    # )
-    # model.add_model("KernelSVM", kernel_svm_gs)
+    kernel_svm_gs = RandomizedSearchCV(
+        estimator=SVC(),
+        param_distributions={
+            "C": np.arange(0.03, 1, 0.1),
+            "gamma": np.arange(0.01, 1, 0.03),
+            "kernel": ["rbf"]
+        },
+        n_iter=5,
+        scoring=scoring,
+        refit=scoring[0],
+        cv=cv,
+        return_train_score=False,
+        random_state=random_state
+    )
+    model.add_model("KernelSVM", kernel_svm_gs)
 
     # Train model
     model.fit(X_train, y_train)
