@@ -17,9 +17,14 @@ from sklearn.model_selection import GridSearchCV
 
 import warnings
 
+SCORING = ["f1_macro", "f1_micro", "accuracy"]
+CV = 3
+RANDOM_STATE = 7
+VOCAB_PATH = "./Vocabulary/vocab_17012.csv"
+
 
 class EnsembleModel:
-    def __init__(self, scoring, vocab_path, cv):
+    def __init__(self, scoring, vocab_path, cv=3):
         self.cv = cv
         self.scoring = scoring
         self.models = {}
@@ -50,7 +55,7 @@ class EnsembleModel:
     def predict(self, X):
         start_time = time.time()
         X = self.feature_transformer.transform(X)
-        total_preds = []
+        total_preds = [[] for _ in range(X.shape[0])]
         for name, model in self.models.items():
             model["pred"] = model["estimator"].predict(X)
             for i, pred in enumerate(model["pred"]):
@@ -58,12 +63,15 @@ class EnsembleModel:
 
         # Major voting
         self.major_votings = []
+        model_predict_rate = []
         for i, preds in enumerate(total_preds):
-            self.major_votings[i], _ = Counter(preds).most_common(1)[0]
+            major_label, num_model_predict_label = Counter(preds).most_common(1)[0]
+            self.major_votings.append(major_label)
+            model_predict_rate.append(num_model_predict_label / len(self.models))
 
         finish_time = time.time()
-        print("Model predict done. Time : {:.4f} seconds".format(finish_time - start_time))
-        return self.major_votings
+        print("Model predict {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
+        return self.major_votings, model_predict_rate
 
     def print_stat_fit(self):
         print("\n===============================")
@@ -146,7 +154,7 @@ class EnsembleModel:
                     "pred": []
                 }
             })
-        self.feature_transformer.fit([0], [0], vocab_path=self.vocab_path)
+        self.feature_transformer.fit([""], [""], vocab_path=self.vocab_path)
         print("Load {} models from {} done".format(len(self.models), save_dir))
 
     def plot_result(self, data_plot, save_fig_dir, is_plot=True):
@@ -156,7 +164,7 @@ class EnsembleModel:
 
         print("Head of data plot")
         print(data_plot.head())
-        x_offset = 0.03
+        x_offset = 0.01
         y_offset = 0.01
         mpl.style.use("seaborn")
 
@@ -192,24 +200,20 @@ class EnsembleModel:
 if __name__ == "__main__":
     warnings.filterwarnings("once")
 
-    vocab_path = "./Vocabulary/vocab_17012.csv"
+
     training_data_path = "./Dataset/data_train.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
-    scoring = ["f1_macro", "f1_micro", "accuracy"]
-    cv = 3
-    random_state = 7
-
-    model = EnsembleModel(scoring, vocab_path, cv)
+    model = EnsembleModel(SCORING, VOCAB_PATH, CV)
 
     # Multinomial Naive Bayes
     mnb_gs = GridSearchCV(
         MultinomialNB(),
         param_grid={"alpha": np.linspace(0.1, 1, 5)},
-        scoring=scoring,
-        refit=scoring[0],
-        cv=cv,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
         return_train_score=False
     )
     model.add_model("MultinomialNB", mnb_gs)
@@ -224,11 +228,11 @@ if __name__ == "__main__":
             "max_depth": np.arange(30, 80, 10)
         },
         n_iter=5,
-        scoring=scoring,
-        refit=scoring[0],
-        cv=cv,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
         return_train_score=False,
-        random_state=random_state
+        random_state=RANDOM_STATE
     )
     model.add_model("RandomForest", rf_gs)
 
@@ -238,11 +242,11 @@ if __name__ == "__main__":
             "C": np.linspace(0.01, 1, 10)
         },
         n_iter=5,
-        scoring=scoring,
-        refit=scoring[0],
-        cv=cv,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
         return_train_score=False,
-        random_state=random_state
+        random_state=RANDOM_STATE
     )
     model.add_model("Linear SVM", linear_svm_gs)
 
@@ -254,11 +258,11 @@ if __name__ == "__main__":
             "kernel": ["rbf"]
         },
         n_iter=5,
-        scoring=scoring,
-        refit=scoring[0],
-        cv=cv,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
         return_train_score=False,
-        random_state=random_state
+        random_state=RANDOM_STATE
     )
     model.add_model("KernelSVM", kernel_svm_gs)
 
