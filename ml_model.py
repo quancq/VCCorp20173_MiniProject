@@ -14,7 +14,10 @@ from sklearn.svm import LinearSVC
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 from sklearn.externals import joblib
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import GridSearchCV
@@ -87,6 +90,7 @@ class EnsembleModel:
             for score in self.scoring:
                 if score != self.scoring[0]:
                     print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
+            print("Training time : {} seconds".format(model["training_time"]))
         print("===============================\n")
 
     def get_statistic_data(self):
@@ -218,7 +222,7 @@ if __name__ == "__main__":
 
     model = EnsembleModel(SCORING, VOCAB_PATH, CV)
 
-    # Multinomial Naive Bayes
+    # 1. Multinomial Naive Bayes
     mnb_gs = GridSearchCV(
         MultinomialNB(),
         param_grid={"alpha": [0.004]},
@@ -229,40 +233,48 @@ if __name__ == "__main__":
     )
     model.add_model("MultiNB", mnb_gs)
 
-    # Random Forest
-    # rf_rs = RandomizedSearchCV(
-    #     RandomForestClassifier(),
-    #     param_distributions={
-    #         "max_features": np.linspace(0.1, 1, 10),
-    #         "n_estimators": np.arange(10, 90, 10),
-    #         # "min_samples_leaf": np.arange(2, 20, 5),
-    #         "max_depth": np.arange(10, 80, 10)
-    #     },
-    #     n_iter=1,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("RandomForest", rf_rs)
+    # 2. Random Forest
+    rf_rs = RandomizedSearchCV(
+        RandomForestClassifier(),
+        param_distributions={
+            # "max_features": np.arange(0.6, 1, 0.1),
+            # "n_estimators": np.arange(10, 40, 5),
+            # # "min_samples_leaf": np.arange(2, 20, 5),
+            # "max_depth": np.arange(50, 90, 5),
+            # "class_weight": ["balanced"],
+            "max_features": [0.8],
+            "n_estimators": [20],
+            # "min_samples_leaf": np.arange(2, 20, 5),
+            "max_depth": [80],
+            "class_weight": ["balanced"],
+            "n_jobs": [-1]
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("RandomForest", rf_rs)
 
-    # Extra tree
-    # et_rs = RandomizedSearchCV(
-    #     ExtraTreesClassifier(),
-    #     param_distributions={
-    #         "n_estimators": np.arange(10, 90, 10),
-    #         # "min_samples_leaf": np.arange(2, 20, 5),
-    #         "max_depth": np.arange(10, 80, 10)
-    #     },
-    #     n_iter=10,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("ExtraTree", et_rs)
+    # 3. Extra tree
+    et_rs = RandomizedSearchCV(
+        ExtraTreesClassifier(),
+        param_distributions={
+            "n_estimators": [50],
+            "max_features": [0.3],
+            "max_depth": [70],
+            "n_jobs": [-1]
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("ExtraTree", et_rs)
 
     # AdaBoost
     # adb_rs = RandomizedSearchCV(
@@ -280,13 +292,16 @@ if __name__ == "__main__":
     # )
     # model.add_model("AdaBoost", adb_rs)
 
-    # XGBoost
-    xgb_rs = RandomizedSearchCV(
-        estimator=XGBClassifier(),
+    # 4. LightGBM
+    lgbm_rs = RandomizedSearchCV(
+        estimator=LGBMClassifier(),
         param_distributions={
-            "n_estimators": np.arange(10, 120, 10),
-            "learning_rate": np.arange(0.1, 1, 0.1),
-            "max_depth": np.arange(5, 80, 10)
+            # "n_estimators": np.arange(40, 80, 10),
+            # "learning_rate": np.arange(0.1, 0.4, 0.1),
+            # "max_depth": np.arange(30, 60, 10),
+            "n_estimators": [60],
+            "learning_rate": [0.2],
+            "max_depth": [60],
         },
         n_iter=1,
         scoring=SCORING,
@@ -295,54 +310,83 @@ if __name__ == "__main__":
         return_train_score=False,
         random_state=RANDOM_STATE
     )
-    model.add_model("XGBoost", xgb_rs)
+    model.add_model("LightGBM", lgbm_rs)
 
-    # Linear SVM
-    # linear_svm_rs = RandomizedSearchCV(
-    #     estimator=LinearSVC(),
+    # 5. Linear SVM
+    linear_svm_gs = GridSearchCV(
+        estimator=LinearSVC(),
+        param_grid={
+            "C": [1.1845]
+        },
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+    )
+    model.add_model("LinearSVM", linear_svm_gs)
+
+    # 6. Kernel SVM
+    kernel_svm_rs = RandomizedSearchCV(
+        estimator=SVC(),
+        param_distributions={
+            "C": [0.7],
+            "gamma": [0.4],
+            "kernel": ["rbf"]
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("KernelSVM", kernel_svm_rs)
+
+    # 7. Logistic Regression
+    lr_gs = GridSearchCV(
+        estimator=LogisticRegression(),
+        param_grid={
+            "C": [1.83]
+        },
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+    )
+    model.add_model("Logistic", lr_gs)
+
+    # 8. KNN
+    knn_rs = RandomizedSearchCV(
+        estimator=KNeighborsClassifier(),
+        param_distributions={
+            "n_neighbors": [9],
+            "weights": ["distance"],
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("KNN", knn_rs)
+
+    # Bagging Multi NB
+    # bg_mnb_rs = RandomizedSearchCV(
+    #     estimator=BaggingClassifier(),
     #     param_distributions={
-    #         "C": np.linspace(0.01, 1, 10)
+    #         "base_estimator": [MultinomialNB()],
+    #         "n_estimators": np.arange(5, 50, 5),
+    #         "max_features": np.arange(0.2, 1, 0.1)
     #     },
-    #     n_iter=2,
+    #     n_iter=5,
     #     scoring=SCORING,
     #     refit=SCORING[0],
     #     cv=CV,
     #     return_train_score=False,
     #     random_state=RANDOM_STATE
     # )
-    # model.add_model("LinearSVM", linear_svm_rs)
-
-    # Kernel SVM
-    # kernel_svm_rs = RandomizedSearchCV(
-    #     estimator=SVC(),
-    #     param_distributions={
-    #         "C": np.arange(0.03, 1, 0.1),
-    #         "gamma": np.arange(0.01, 1, 0.03),
-    #         "kernel": ["rbf"]
-    #     },
-    #     n_iter=2,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("KernelSVM", kernel_svm_rs)
-
-    # Logistic Regression
-    # lr_rs = RandomizedSearchCV(
-    #     estimator=LogisticRegression(),
-    #     param_distributions={
-    #         "C": np.arange(0.01, 1, 0.05)
-    #     },
-    #     n_iter=2,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("Logistic", lr_rs)
+    # model.add_model("Bagging_MNB", bg_mnb_rs)
 
     # Train model
     model.fit(X_train, y_train)
