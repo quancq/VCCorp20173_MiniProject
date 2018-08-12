@@ -1,1 +1,0 @@
-[{"model_name": "ExtraTree", "model_path": "./Model/2018-08-12_18-45-44/ExtraTree.joblib", "model_params": {"max_depth": 60, "n_estimators": 50}}, {"model_name": "MultiNB", "model_path": "./Model/2018-08-12_18-45-44/MultiNB.joblib", "model_params": {"alpha": 0.004}}]

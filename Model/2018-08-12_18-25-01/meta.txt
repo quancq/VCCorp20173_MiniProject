@@ -1,1 +1,0 @@
-[{"model_params": {"alpha": 0.004}, "model_name": "MultiNB", "model_path": "./Model/2018-08-12_18-25-01/MultiNB.joblib"}]

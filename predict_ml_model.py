@@ -38,9 +38,8 @@ if __name__ == "__main__":
     X_test = df.content.values
 
     # Load model
-
     model = EnsembleModel(SCORING, VOCAB_PATH)
-    model_dir = "./Model/2018-08-11_19-21-22"
+    model_dir = "./Model/2018-08-13_01-56-01"
     model.load_model(model_dir)
 
     y_pred, prob_pred = model.predict(X_test)

@@ -1,1 +1,0 @@
-[{"model_name": "MultiNB", "model_params": {"alpha": 0.004}, "model_path": "./Model/2018-08-12_18-37-03/MultiNB.joblib"}, {"model_name": "RandomForest", "model_params": {"max_features": 0.8, "max_depth": 70, "n_estimators": 20}, "model_path": "./Model/2018-08-12_18-37-03/RandomForest.joblib"}]

@@ -3,35 +3,52 @@
   <component name="ChangeListManager">
     <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/AdaBoost.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/ExtraTree.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/KernelSVM.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/LinearSVM.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Logistic.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/MultiNB.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/RandomForest.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/accuracy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/f1_macro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/f1_micro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/XGBoost.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/meta.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/MultiNB.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/accuracy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/f1_macro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/f1_micro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/meta.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/MultiNB.joblib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/accuracy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/f1_macro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/f1_micro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/meta.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_parameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/Statistic_Figure/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/Statistic_Figure/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/Statistic_Figure/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-47-35/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/Statistic/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/Statistic/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/Statistic/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/Statistic/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/Statistic/result.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-25-01/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/Statistic/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/Statistic/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/Statistic/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/Statistic/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/Statistic/result.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-27-26/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/RandomForest.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/Statistic/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/Statistic/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/Statistic/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/Statistic/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/Statistic/result.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-37-03/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/ExtraTree.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/Statistic/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/Statistic/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/Statistic/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/Statistic/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/Statistic/result.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-45-44/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/AdaBoost.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/Statistic/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/Statistic/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/Statistic/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/Statistic/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/Statistic/result.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_18-52-41/meta.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predict_ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_ml_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +69,8 @@
           <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="4" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.open.time.9" value="5" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -69,13 +86,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="24680" />
+          <entry key="py" value="25921" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="24680" />
+          <entry key="Python" value="25921" />
         </counts>
       </usages-collector>
     </session>
@@ -97,31 +114,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
+            <state relative-caret-position="3325">
               <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1534069187120" expanded="true" signature="589:1048" ph="..." />
                 <marker date="1534069187120" expanded="true" signature="5754:5758" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hyper_parameters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/stop_words.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1520">
-              <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -155,24 +154,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
+            <state relative-caret-position="285">
+              <caret line="249" column="26" lean-forward="true" selection-start-line="249" selection-start-column="26" selection-end-line="249" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1534078319334" expanded="true" signature="812:1034" ph="..." />
+                <marker date="1534100280074" expanded="true" signature="946:1168" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1007">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="164">
+              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -204,10 +203,10 @@
         <option value="$PROJECT_DIR$/ExploreDataset.py" />
         <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/utils.py" />
-        <option value="$PROJECT_DIR$/predict_ml_model.py" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
         <option value="$PROJECT_DIR$/hyper_parameters.py" />
         <option value="$PROJECT_DIR$/ml_model.py" />
+        <option value="$PROJECT_DIR$/predict_ml_model.py" />
       </list>
     </option>
   </component>
@@ -223,7 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,6 +233,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -263,7 +262,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ml_model">
+  <component name="RunManager" selected="Python.predict_ml_model">
     <configuration name="ml_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MiniProject_VCCorp20173" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -378,9 +377,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.predict_ml_model" />
         <item itemvalue="Python.ml_model" />
         <item itemvalue="Python.preprocessing" />
-        <item itemvalue="Python.predict_ml_model" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.utils" />
       </list>
@@ -390,13 +389,14 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="717" extended-state="6" />
+    <frame x="0" y="-4" width="1366" height="709" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13328369" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41707718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23973727" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39901477" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -436,6 +436,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3325">
+          <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1534069187120" expanded="true" signature="589:1048" ph="..." />
+            <marker date="1534069187120" expanded="true" signature="5754:5758" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hyper_parameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stop_words.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1520">
@@ -468,42 +487,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hyper_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1534069187120" expanded="true" signature="589:1048" ph="..." />
-            <marker date="1534069187120" expanded="true" signature="5754:5758" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ml_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
+        <state relative-caret-position="285">
+          <caret line="249" column="26" lean-forward="true" selection-start-line="249" selection-start-column="26" selection-end-line="249" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1534078319334" expanded="true" signature="812:1034" ph="..." />
+            <marker date="1534100280074" expanded="true" signature="946:1168" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
