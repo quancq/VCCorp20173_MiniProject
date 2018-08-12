@@ -175,6 +175,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
     @staticmethod
     def load_encoded_data(save_path):
+        start_time = time.time()
         print("Start to load encoded data from ", save_path)
         with open(save_path, 'r') as f:
             data = json.load(f)
@@ -191,7 +192,9 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
             sparse_content = csr_matrix((en_data, en_indices, en_indptr), shape=en_shape)
             encoded_docs.append(sparse_content)
 
-        print("Load encoded data (size = {}) from {} done".format(len(labels), save_path))
+        exec_time = time.time() - start_time
+        print("Load encoded data (size = {}) from {} done. Time : {} seconds".format(
+            len(labels), save_path, exec_time))
         return vstack(encoded_docs), labels
 
 

@@ -89,12 +89,13 @@ class EnsembleModel:
                     print("Mean valid {} score : {}".format(score, instance.cv_results_["mean_test_{}".format(score)][best_index]))
         print("===============================\n")
 
-    def get_data_plot(self):
+    def get_statistic_data(self):
         data_plot = []
-        columns = ["Model"] + self.scoring + ["Training_Time (Seconds)"]
+        columns = ["Model", "Hyper_Parameter"] + self.scoring + ["Training_Time (Seconds)"]
         for name, model in self.models.items():
             row = [name]
             instance = model["estimator"]
+            row.append(instance.best_params_)
             row.append(instance.best_score_)
             best_index = instance.best_index_
             for score in self.scoring:
@@ -133,11 +134,17 @@ class EnsembleModel:
 
         # Save figure about training result of models
         # Create data frame contains result
-        data_plot = self.get_data_plot()
+        statistic_data = self.get_statistic_data()
+
+        # Save statistic data
+        statistic_save_dir = os.path.join(save_dir, "Statistic")
+        utils.mkdirs(statistic_save_dir)
+        result_save_path = os.path.join(statistic_save_dir, "result.csv")
+        statistic_data.to_csv(result_save_path, index=False)
 
         # Plot and save figure
-        save_plot_dir = os.path.join(save_dir, "Statistic_Figure")
-        self.plot_result(data_plot, save_plot_dir, is_plot=True)
+        data_plot = statistic_data.drop("Hyper_Parameter", axis=1)
+        self.plot_result(data_plot, statistic_save_dir, is_plot=False)
 
     def load_model(self, save_dir):
         print("Start to load models from ", save_dir)
@@ -176,7 +183,7 @@ class EnsembleModel:
             data_plot.sort_values(score_solumn, ascending=True, inplace=True)
 
             ax = data_plot.plot(kind="bar", x=model_column, y=score_solumn,
-                                legend=None, color='C1', figsize=(len(self.models), 4), width=0.3)
+                                legend=None, color='C1', figsize=(len(self.models) + 1, 4), width=0.3)
             title = "Mean {} score - {} cross validation".format(score_solumn, self.cv)
             ax.set(title=title, xlabel=model_column, ylabel=score_solumn)
             ax.tick_params(axis='x', rotation=0)
@@ -214,7 +221,7 @@ if __name__ == "__main__":
     # Multinomial Naive Bayes
     mnb_gs = GridSearchCV(
         MultinomialNB(),
-        param_grid={"alpha": np.arange(0.001, 0.2, 0.3)},
+        param_grid={"alpha": [0.004]},
         scoring=SCORING,
         refit=SCORING[0],
         cv=CV,
@@ -227,11 +234,11 @@ if __name__ == "__main__":
     #     RandomForestClassifier(),
     #     param_distributions={
     #         "max_features": np.linspace(0.1, 1, 10),
-    #         "n_estimators": np.arange(15, 90, 20),
+    #         "n_estimators": np.arange(10, 90, 10),
     #         # "min_samples_leaf": np.arange(2, 20, 5),
-    #         "max_depth": np.arange(30, 80, 10)
+    #         "max_depth": np.arange(10, 80, 10)
     #     },
-    #     n_iter=2,
+    #     n_iter=1,
     #     scoring=SCORING,
     #     refit=SCORING[0],
     #     cv=CV,
@@ -244,11 +251,11 @@ if __name__ == "__main__":
     # et_rs = RandomizedSearchCV(
     #     ExtraTreesClassifier(),
     #     param_distributions={
-    #         "n_estimators": np.arange(10, 90, 20),
+    #         "n_estimators": np.arange(10, 90, 10),
     #         # "min_samples_leaf": np.arange(2, 20, 5),
-    #         "max_depth": np.arange(20, 80, 10)
+    #         "max_depth": np.arange(10, 80, 10)
     #     },
-    #     n_iter=2,
+    #     n_iter=10,
     #     scoring=SCORING,
     #     refit=SCORING[0],
     #     cv=CV,
@@ -261,10 +268,10 @@ if __name__ == "__main__":
     # adb_rs = RandomizedSearchCV(
     #     estimator=AdaBoostClassifier(),
     #     param_distributions={
-    #         "n_estimators": np.arange(20, 80, 20),
-    #         "learning_rate": np.arange(0.01, 1, 0.05)
+    #         "n_estimators": np.arange(10, 100, 10),
+    #         "learning_rate": np.arange(0.1, 1, 0.1)
     #     },
-    #     n_iter=2,
+    #     n_iter=1,
     #     scoring=SCORING,
     #     refit=SCORING[0],
     #     cv=CV,
@@ -274,21 +281,21 @@ if __name__ == "__main__":
     # model.add_model("AdaBoost", adb_rs)
 
     # XGBoost
-    # xgb_rs = RandomizedSearchCV(
-    #     estimator=XGBClassifier(),
-    #     param_distributions={
-    #         "n_estimators": np.arange(30, 120, 20),
-    #         "learning_rate": np.arange(0.01, 1, 0.05),
-    #         "max_depth": np.arange(5, 50, 10)
-    #     },
-    #     n_iter=2,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("XGBoost", xgb_rs)
+    xgb_rs = RandomizedSearchCV(
+        estimator=XGBClassifier(),
+        param_distributions={
+            "n_estimators": np.arange(10, 120, 10),
+            "learning_rate": np.arange(0.1, 1, 0.1),
+            "max_depth": np.arange(5, 80, 10)
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("XGBoost", xgb_rs)
 
     # Linear SVM
     # linear_svm_rs = RandomizedSearchCV(

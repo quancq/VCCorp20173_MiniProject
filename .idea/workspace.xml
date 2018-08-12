@@ -3,6 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/AdaBoost.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/ExtraTree.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/KernelSVM.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/LinearSVM.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Logistic.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/RandomForest.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/Statistic_Figure/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/XGBoost.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_12-13-11/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/Statistic_Figure/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_15-23-15/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/MultiNB.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/Training_Time (Seconds).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/accuracy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/f1_macro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/Statistic_Figure/f1_micro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/2018-08-12_17-09-24/meta.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hyper_parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/hyper_parameters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.py" afterDir="false" />
     </list>
@@ -16,17 +43,17 @@
     <session id="-487142137">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
+          <entry key="project.closed" value="16" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.13" value="3" />
+          <entry key="project.open.time.13" value="4" />
           <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="4" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -42,13 +69,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="24238" />
+          <entry key="py" value="24680" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="24238" />
+          <entry key="Python" value="24680" />
         </counts>
       </usages-collector>
     </session>
@@ -70,12 +97,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="219" column="85" selection-start-line="219" selection-start-column="24" selection-end-line="219" selection-end-column="85" />
+            <state relative-caret-position="296">
+              <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1534067612058" expanded="true" signature="589:1048" ph="..." />
-                <marker date="1534067612058" expanded="true" signature="5754:5758" ph="..." />
+                <marker date="1534069187120" expanded="true" signature="589:1048" ph="..." />
+                <marker date="1534069187120" expanded="true" signature="5754:5758" ph="..." />
               </folding>
             </state>
           </provider>
@@ -84,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hyper_parameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+            <state relative-caret-position="152">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -93,7 +120,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stop_words.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
+            <state relative-caret-position="1520">
               <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
             </state>
           </provider>
@@ -102,7 +129,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3658">
+            <state relative-caret-position="152">
               <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <marker date="1534048576899" expanded="true" signature="541:546" ph="..." />
@@ -131,11 +158,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+            <state relative-caret-position="170">
+              <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1534068556873" expanded="true" signature="812:1034" ph="..." />
+                <marker date="1534078319334" expanded="true" signature="812:1034" ph="..." />
               </folding>
             </state>
           </provider>
@@ -144,7 +171,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
+            <state relative-caret-position="1007">
               <caret line="56" selection-start-line="56" selection-end-line="56" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -178,8 +205,8 @@
         <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/predict_ml_model.py" />
-        <option value="$PROJECT_DIR$/hyper_parameters.py" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
+        <option value="$PROJECT_DIR$/hyper_parameters.py" />
         <option value="$PROJECT_DIR$/ml_model.py" />
       </list>
     </option>
@@ -196,6 +223,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -207,7 +235,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -363,13 +390,13 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1366" height="709" extended-state="6" />
+    <frame x="-1" y="-11" width="1368" height="717" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13328369" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.408867" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41707718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39901477" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -392,12 +419,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/sklearn/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="492" column="8" selection-start-line="492" selection-start-column="8" selection-end-line="492" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/explore_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="27" column="51" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="51" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stop_words.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1520">
+          <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <marker date="1534048576899" expanded="true" signature="541:546" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="911:916" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="968:1255" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="2155:2160" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="5291:5858" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="5438:5509" ph="..." />
           </folding>
         </state>
       </provider>
@@ -412,16 +468,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/sklearn/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="492" column="8" selection-start-line="492" selection-start-column="8" selection-end-line="492" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
+        <state relative-caret-position="1007">
           <caret line="56" selection-start-line="56" selection-end-line="56" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -431,52 +480,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hyper_parameters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stop_words.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3658">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <marker date="1534048576899" expanded="true" signature="541:546" ph="..." />
-            <marker date="1534048576899" expanded="true" signature="911:916" ph="..." />
-            <marker date="1534048576899" expanded="true" signature="968:1255" ph="..." />
-            <marker date="1534048576899" expanded="true" signature="2155:2160" ph="..." />
-            <marker date="1534048576899" expanded="true" signature="5291:5858" ph="..." />
-            <marker date="1534048576899" expanded="true" signature="5438:5509" ph="..." />
-          </folding>
+        <state relative-caret-position="152">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="219" column="85" selection-start-line="219" selection-start-column="24" selection-end-line="219" selection-end-column="85" />
+        <state relative-caret-position="296">
+          <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1534067612058" expanded="true" signature="589:1048" ph="..." />
-            <marker date="1534067612058" expanded="true" signature="5754:5758" ph="..." />
+            <marker date="1534069187120" expanded="true" signature="589:1048" ph="..." />
+            <marker date="1534069187120" expanded="true" signature="5754:5758" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ml_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
+        <state relative-caret-position="170">
+          <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1534068556873" expanded="true" signature="812:1034" ph="..." />
+            <marker date="1534078319334" expanded="true" signature="812:1034" ph="..." />
           </folding>
         </state>
       </provider>

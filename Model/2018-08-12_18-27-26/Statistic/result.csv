@@ -1,0 +1,2 @@
+Model,Hyper_Parameter,f1_macro,f1_micro,accuracy,Training_Time (Seconds)
+MultiNB,{'alpha': 0.0088},0.8405268111577199,0.9081239684577297,0.9081239684577297,32.78084325790405
