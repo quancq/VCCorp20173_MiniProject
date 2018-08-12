@@ -1,19 +1,18 @@
 import numpy as np
 import pandas as pd
 import utils
+from utils import MyEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re, os, time
 from pyvi import ViTokenizer
 from stop_words import STOP_WORDS as vi_stop_words
 from nltk.corpus import stopwords
-import string
+import json
 from collections import Counter
+from scipy.sparse import csr_matrix, vstack
 
-MAX_WORD_LENGTH = 20
-MIN_WORD_LENGTH = 2
-NUM_LABELS = 22
-MIN_OCCURRENCES_TOKEN = 3
+from hyper_parameters import MIN_OCCURRENCES_TOKEN, MIN_WORD_LENGTH, MAX_WORD_LENGTH, NUM_LABELS, VOCAB_PATH
 
 
 class FeatureTransformer(BaseEstimator, TransformerMixin):
@@ -156,6 +155,45 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         # print("Là :", self.vocab.get("là"), self.vocab.get("Là"))
         # print("Được :", self.vocab.get("được"), self.vocab.get("ĐưỢc"))
 
+    @staticmethod
+    def save_encoded_data(encoded_docs, labels, save_path):
+        print("Start to save encoded data to ", save_path)
+        data = []
+        for doc, label in zip(encoded_docs, labels):
+            data.append({
+                "label": label,
+                "encoded_content": {
+                    "data": doc.data,
+                    "indices": doc.indices,
+                    "indptr": doc.indptr,
+                    "shape": (doc.shape[0], doc.shape[1]),
+                }
+            })
+        with open(save_path, 'w') as f:
+            json.dump(data, f, cls=MyEncoder)
+        print("Save encoded data (size = {}) to {} done".format(len(data), save_path))
+
+    @staticmethod
+    def load_encoded_data(save_path):
+        print("Start to load encoded data from ", save_path)
+        with open(save_path, 'r') as f:
+            data = json.load(f)
+
+        encoded_docs = []
+        labels = []
+        for elm in data:
+            labels.append(elm["label"])
+            encoded_content = elm["encoded_content"]
+            en_data = encoded_content["data"]
+            en_indices = encoded_content["indices"]
+            en_indptr = encoded_content["indptr"]
+            en_shape = encoded_content["shape"]
+            sparse_content = csr_matrix((en_data, en_indices, en_indptr), shape=en_shape)
+            encoded_docs.append(sparse_content)
+
+        print("Load encoded data (size = {}) from {} done".format(len(labels), save_path))
+        return vstack(encoded_docs), labels
+
 
 if __name__ == "__main__":
     training_data_path = "./Dataset/data_train.json"
@@ -163,14 +201,32 @@ if __name__ == "__main__":
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
     # Generate new vocabulary
-    min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
-    ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
-    ft.fit(X_train, y_train)
-    vocab_dir = "./Vocabulary/"
-    ft.save_vocab(vocab_dir)
-    ft.print_stats_vocab(10)
+    # min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
+    # ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
+    # ft.fit(X_train, y_train)
+    # vocab_dir = "./Vocabulary/"
+    # ft.save_vocab(vocab_dir)
+    # ft.print_stats_vocab(10)
     # vocab = ft.get_tfidf_vocab()
     # utils.write_vocab(vocab, "./ExploreResult/vitoken_vocab_{}.txt".format(len(vocab)))
 
-    # X_train = ft.preprocess(X_train)
-    # print(X_train[:3])
+    # Save encoded documents
+    ft = FeatureTransformer()
+    X_train_encoded = ft.fit_transform(X_train, y_train, vocab_path=VOCAB_PATH)
+
+    X_before = X_train_encoded[:5]
+    y_before = y_train[-5:]
+
+    encoded_save_path = "./Dataset/encoded_training_data_{}.json".format(len(y_train))
+    FeatureTransformer.save_encoded_data(X_train_encoded, y_train, encoded_save_path)
+
+    X_train_encoded_new, y_train_new = FeatureTransformer.load_encoded_data(encoded_save_path)
+    X_after = X_train_encoded_new[:5]
+    y_after = y_train_new[-5:]
+
+    print("Compare : ", np.sum(X_before != X_after), np.sum(y_before != y_after))
+    # print(X_before)
+
+    print("\n\n===============")
+    # print(X_after)
+
