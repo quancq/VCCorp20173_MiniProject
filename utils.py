@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 from sklearn.model_selection import train_test_split
 import itertools
+from datetime import datetime
 
 
 def upper(s):
@@ -197,6 +198,11 @@ def mkdirs(dir_path):
     if not os.path.exists(dir_path):
         print("Create new directory : ", dir_path)
         os.makedirs(dir_path)
+
+
+def get_format_time_now():
+    dt = datetime.now()
+    return dt.strftime("%Y-%m-%d_%H-%M-%S")
 
 
 class MyEncoder(json.JSONEncoder):

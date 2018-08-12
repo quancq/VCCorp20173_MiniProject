@@ -4,6 +4,8 @@
     <list default="true" id="d86ab7c4-54ce-4c28-bd5a-6555153cb2b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predict_ml_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_ml_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +17,7 @@
     <session id="-487142137">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
@@ -24,8 +26,8 @@
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -41,13 +43,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="20478" />
+          <entry key="py" value="22055" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="20478" />
+          <entry key="Python" value="22055" />
         </counts>
       </usages-collector>
     </session>
@@ -69,7 +71,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
+            <state relative-caret-position="427">
               <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -83,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stop_words.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30476">
+            <state relative-caret-position="427">
               <caret line="1604" column="2" selection-start-line="1604" selection-start-column="2" selection-end-line="1604" selection-end-column="2" />
             </state>
           </provider>
@@ -92,15 +94,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
+            <state relative-caret-position="195">
+              <caret line="201" selection-start-line="201" selection-end-line="201" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
-                <marker date="1533988743419" expanded="true" signature="511:516" ph="..." />
-                <marker date="1533988743419" expanded="true" signature="881:886" ph="..." />
-                <marker date="1533988743419" expanded="true" signature="938:1225" ph="..." />
-                <marker date="1533988743419" expanded="true" signature="2125:2130" ph="..." />
-                <marker date="1533988743419" expanded="true" signature="5261:5731" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="541:546" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="911:916" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="968:1255" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="2155:2160" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="5291:5858" ph="..." />
+                <marker date="1534048576899" expanded="true" signature="5438:5509" ph="..." />
               </folding>
             </state>
           </provider>
@@ -118,24 +121,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1022">
-              <caret line="166" column="23" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
+            <state relative-caret-position="321">
+              <caret line="80" column="33" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1534008348075" expanded="true" signature="694:916" ph="..." />
+                <marker date="1534050675056" expanded="true" signature="878:1100" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+            <state relative-caret-position="443">
+              <caret line="56" selection-start-line="56" selection-end-line="56" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -168,8 +171,8 @@
         <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
         <option value="$PROJECT_DIR$/utils.py" />
-        <option value="$PROJECT_DIR$/predict_ml_model.py" />
         <option value="$PROJECT_DIR$/ml_model.py" />
+        <option value="$PROJECT_DIR$/predict_ml_model.py" />
       </list>
     </option>
   </component>
@@ -358,7 +361,7 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3957307" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4187192" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39901477" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,13 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stop_words.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30476">
-          <caret line="1604" column="2" selection-start-line="1604" selection-start-column="2" selection-end-line="1604" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/temp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -417,7 +413,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
+        <state relative-caret-position="427">
           <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -427,38 +423,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
+    <entry file="file://$PROJECT_DIR$/stop_words.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="119" column="4" selection-start-line="119" selection-start-column="4" selection-end-line="119" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-            <marker date="1533988743419" expanded="true" signature="511:516" ph="..." />
-            <marker date="1533988743419" expanded="true" signature="881:886" ph="..." />
-            <marker date="1533988743419" expanded="true" signature="938:1225" ph="..." />
-            <marker date="1533988743419" expanded="true" signature="2125:2130" ph="..." />
-            <marker date="1533988743419" expanded="true" signature="5261:5731" ph="..." />
-          </folding>
+        <state relative-caret-position="427">
+          <caret line="1604" column="2" selection-start-line="1604" selection-start-column="2" selection-end-line="1604" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
+    <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+        <state relative-caret-position="195">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="true" />
+            <marker date="1534048576899" expanded="true" signature="541:546" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="911:916" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="968:1255" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="2155:2160" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="5291:5858" ph="..." />
+            <marker date="1534048576899" expanded="true" signature="5438:5509" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ml_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1022">
-          <caret line="166" column="23" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
+        <state relative-caret-position="321">
+          <caret line="80" column="33" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="33" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <marker date="1534008348075" expanded="true" signature="694:916" ph="..." />
+            <marker date="1534050675056" expanded="true" signature="878:1100" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict_ml_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
