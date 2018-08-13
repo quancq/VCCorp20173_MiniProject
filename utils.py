@@ -7,6 +7,7 @@ from wordcloud import WordCloud, STOPWORDS
 from sklearn.model_selection import train_test_split
 import itertools
 from datetime import datetime
+from hyper_parameters import LABELS
 
 
 def upper(s):
@@ -140,8 +141,11 @@ def convert_two_list_to_dicts(contents, labels):
     return lst
 
 
+# Source: http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
 def plot_confusion_matrix(cm, classes,
-                          normalize=False,
+                          save_path,
+                          normalize=True,
+                          is_plot=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
     """
@@ -149,30 +153,52 @@ def plot_confusion_matrix(cm, classes,
     Normalization can be applied by setting `normalize=True`.
     """
     if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        cm = cm.astype('float')
+        cm_sum = cm.sum(axis=1)[:, np.newaxis]
+        cm = np.divide(cm, cm_sum, out=np.zeros_like(cm), where=cm_sum != 0)
         print("Normalized confusion matrix")
     else:
         print('Confusion matrix, without normalization')
 
+    print("Confusion matrix shape : ", cm.shape)
     print(cm)
-
+    plt.figure(figsize=(6, 6))
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
+    plt.xlabel("Predicted label")
+    plt.ylabel("True label")
     plt.colorbar()
+
     tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
+    plt.xticks(tick_marks, classes)
     plt.yticks(tick_marks, classes)
 
     fmt = '.2f' if normalize else 'd'
     thresh = cm.max() / 2.
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
+        s = format(cm[i, j], fmt) if cm[i, j] > 0 else 0
+        plt.text(j, i, s,
                  horizontalalignment="center",
                  color="white" if cm[i, j] > thresh else "black")
 
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
+    # plt.tight_layout()
+
+    # Save figure
+    plt.savefig(save_path)
+
+    if is_plot:
+        plt.show()
+
+
+def plot_multi_confusion_matrix(cf_mats, save_dir):
+    print("Start to plot multi confusion matrix to ", save_dir)
+    mkdirs(save_dir)
+
+    for model_name, cf_mat in cf_mats.items():
+        save_path = os.path.join(save_dir, "{}.png".format(model_name))
+        plot_confusion_matrix(cf_mat, LABELS, save_path)
+
+    print("Plot {} confusion matrix to {} done".format(len(cf_mats), save_dir))
 
 
 def split_data(data, test_size=0.2):

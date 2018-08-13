@@ -2,31 +2,8 @@ import numpy as np
 import pandas as pd
 import utils, os
 from ml_model import EnsembleModel, VOCAB_PATH, SCORING
+from hyper_parameters import MAP_LABEL_ID_TO_TEXT
 
-MAP_LABEL_ID_TO_TEXT = {
-    1: "Thông số kĩ thuật",
-    2: "Viễn thông",
-    6: "Du lịch",
-    7: "Giáo dục",
-    8: "Sản phẩm",
-    9: "Công thức nấu ăn",
-    10: "Y tế",
-    11: "Mỹ phẩm",
-    12: "Thời trang",
-    13: "Bất động sản",
-    14: "Thiết kế nội thất",
-    15: "Ẩm thực",
-    16: "Xe cộ",
-    17: "Đời sống - Chứng khoán",
-    19: "Kinh tế - Chính trị - Xã hội",
-    20: "Nông nghiệp - Công nghiệp",
-    21: "Quảng cáo công ty",
-    22: "Kế toán - Kiểm toán",
-    23: "Game",
-    24: "Mẹ và bé",
-    156: "Hàng không",
-    188: "Bóng đá",
-}
 
 if __name__ == "__main__":
     # Load test data
@@ -40,8 +17,10 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     model_dir = "./Model/2018-08-13_01-56-01"
+    # model_dir = "./Model/2018-08-13_09-25-33"
     model.load_model(model_dir)
 
+    # Predict
     y_pred, prob_pred = model.predict(X_test)
     df["LabelID_Pred"] = y_pred
     df["Label_Pred"] = [MAP_LABEL_ID_TO_TEXT.get(label_id, "Unknown") for label_id in y_pred]

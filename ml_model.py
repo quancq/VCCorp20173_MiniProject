@@ -7,6 +7,11 @@ from collections import Counter
 import time, os, json
 from datetime import datetime
 from preprocessing import FeatureTransformer
+from sklearn.externals import joblib
+from hyper_parameters import CV, VOCAB_PATH, RANDOM_STATE, SCORING, LABELS
+
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
@@ -16,12 +21,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
-from sklearn.externals import joblib
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.model_selection import GridSearchCV
-from hyper_parameters import CV, VOCAB_PATH, RANDOM_STATE, SCORING
 
 
 class EnsembleModel:
@@ -77,6 +79,51 @@ class EnsembleModel:
         finish_time = time.time()
         print("Model predict {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
         return self.major_votings, model_predict_rate
+
+    def evaluate(self, X_test, y_test, metrics):
+        # Predict X_test
+        major_pred, _ = self.predict(X_test)
+
+        # Evaluate models on metrics
+        result = []
+        cf_mats = {}
+        columns = list(metrics.keys())
+        for name, model in self.models.items():
+            row = [name]
+            y_pred = model["pred"]
+            for metric_name in columns:
+                metric_fn = metrics.get(metric_name).get("fn")
+                metric_params = metrics.get(metric_name).get("params")
+                print("Score : {}, Params : {}".format(metric_name, metric_params))
+                if metric_params is None:
+                    value_score = metric_fn(y_test, y_pred, LABELS)
+                else:
+                    value_score = metric_fn(y_test, y_pred, LABELS, **metric_params)
+                row.append(value_score)
+            result.append(row)
+
+            # Calculate confusion matrix
+            cf_mat = confusion_matrix(y_test, y_pred, labels=LABELS)
+            cf_mats.update({name: cf_mat})
+
+        # Evaluate ensemble model
+        ensemble_model_name = "Ensemble"
+        row = [ensemble_model_name]
+        for metric_name in columns:
+            metric_fn = metrics.get(metric_name).get("fn")
+            metric_params = metrics.get(metric_name).get("params")
+            if metric_params is None:
+                value_score = metric_fn(y_test, y_pred, LABELS)
+            else:
+                value_score = metric_fn(y_test, y_pred, LABELS, **metric_params)
+            row.append(value_score)
+        result.append(row)
+        cf_mats.update({ensemble_model_name: confusion_matrix(y_test, major_pred, labels=LABELS)})
+
+        columns = ["Model"] + columns
+        result = pd.DataFrame(result, columns=columns)
+
+        return result, cf_mats
 
     def print_stat_fit(self):
         print("\n===============================")
