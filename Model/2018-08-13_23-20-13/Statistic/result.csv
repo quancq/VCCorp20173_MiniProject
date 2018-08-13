@@ -1,6 +1,0 @@
-Model,Hyper_Parameter,f1_macro,f1_micro,accuracy,Training_Time (Seconds)
-LinearSVM,"{'C': 1.1845, 'class_weight': 'balanced'}",0.8505873205542163,0.9142595139844109,0.9142595139844109,3.734936475753784
-MultiNB,{'alpha': 0.004},0.8535288119762958,0.920907840440165,0.920907840440165,0.377763032913208
-ExtraTree,"{'max_features': 0.3, 'n_estimators': 50, 'n_jobs': -1, 'max_depth': 70, 'class_weight': 'balanced'}",0.7943766145666126,0.849610270518111,0.849610270518111,69.6461284160614
-RandomForest,"{'max_features': 0.8, 'n_estimators': 20, 'n_jobs': -1, 'max_depth': 80, 'class_weight': 'balanced'}",0.7839240369142101,0.8459422283356258,0.8459422283356258,57.23340964317322
-Logistic,"{'C': 1.83, 'class_weight': 'balanced', 'n_jobs': -1}",0.85036280999451,0.9069234296194406,0.9069234296194406,12.111464262008667

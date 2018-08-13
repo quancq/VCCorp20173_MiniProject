@@ -1,5 +1,0 @@
-Model,Hyper_Parameter,f1_macro,f1_micro,accuracy,Training_Time (Seconds)
-KNN,"{'n_neighbors': 9, 'weights': 'distance'}",0.7986847721273908,0.8663457129756992,0.8663457129756992,2.2281687259674072
-MultiNB,{'alpha': 0.004},0.8535288119762958,0.920907840440165,0.920907840440165,0.3540620803833008
-Logistic,"{'class_weight': 'balanced', 'C': 1.83, 'n_jobs': -1}",0.85036280999451,0.9069234296194406,0.9069234296194406,11.376938343048096
-RandomForest,"{'class_weight': 'balanced', 'max_features': 0.8, 'n_jobs': -1, 'max_depth': 80, 'n_estimators': 20}",0.7835946063871067,0.8404401650618982,0.8404401650618982,45.79447865486145
