@@ -35,5 +35,13 @@ if __name__ == "__main__":
     print(result_df)
 
     # Save confusion matrix figure
-    save_dir = os.path.join(model_dir, "Evaluate")
-    utils.plot_multi_confusion_matrix(cf_mats, save_dir)
+    eval_save_dir = os.path.join(model_dir, "Evaluate")
+    cm_save_dir = os.path.join(eval_save_dir, "Confusion_Matrix")
+    utils.plot_multi_confusion_matrix(cf_mats, cm_save_dir)
+
+    # Save result plot
+    utils.plot_multi_bar_with_annot(result_df, fig_save_dir=eval_save_dir, is_plot=False)
+
+    result_save_path = os.path.join(eval_save_dir, "evaluate_{}.csv".format(len(y_test)))
+    result_df.to_csv(result_save_path, index=False)
+    print("Save file evaluate to {} done".format(result_save_path))

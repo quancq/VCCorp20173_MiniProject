@@ -87,7 +87,7 @@ class EnsembleModel:
         # Evaluate models on metrics
         result = []
         cf_mats = {}
-        columns = list(metrics.keys())
+        columns = sorted(list(metrics.keys()))
         for name, model in self.models.items():
             row = [name]
             y_pred = model["pred"]

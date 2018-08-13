@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import seaborn as sns
 from wordcloud import WordCloud, STOPWORDS
 from sklearn.model_selection import train_test_split
 import itertools
@@ -160,28 +161,42 @@ def plot_confusion_matrix(cm, classes,
     else:
         print('Confusion matrix, without normalization')
 
-    print("Confusion matrix shape : ", cm.shape)
-    print(cm)
-    plt.figure(figsize=(6, 6))
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.xlabel("Predicted label")
-    plt.ylabel("True label")
-    plt.colorbar()
-
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes)
-    plt.yticks(tick_marks, classes)
-
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        s = format(cm[i, j], fmt) if cm[i, j] > 0 else 0
-        plt.text(j, i, s,
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
+    # print("Confusion matrix shape : ", cm.shape)
+    # print(cm)
+    # plt.figure(figsize=(8, 8))
+    # plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    # plt.title(title)
+    # plt.xlabel("Predicted label")
+    # plt.ylabel("True label")
+    # plt.colorbar()
+    #
+    # tick_marks = np.arange(len(classes))
+    # plt.xticks(tick_marks, classes)
+    # plt.yticks(tick_marks, classes)
+    #
+    # fmt = '.2f' if normalize else 'd'
+    # thresh = cm.max() / 2.
+    # for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+    #     s = format(cm[i, j], fmt) if cm[i, j] > 0 else 0
+    #     plt.text(j, i, s,
+    #              ha="center", va="center",
+    #              color="white" if cm[i, j] > thresh else "black")
+    #
     # plt.tight_layout()
+
+    # _, ax = plt.subplots()
+    # mask = (cm == 0)
+    cm_df = pd.DataFrame(cm)
+    cm_df = cm_df.applymap(lambda x: "{:g}".format(round(x, 2)) if x > 0 else "0")
+    # print(cm_df.head())
+
+    plt.figure(figsize=(12, 12))
+
+    sns.heatmap(cm, cmap=cmap, annot=cm_df, xticklabels=classes, yticklabels=classes, fmt='')
+    plt.title(title, fontsize=20)
+    plt.xlabel("Predicted label", fontsize=20)
+    plt.ylabel("True label", fontsize=20)
+    plt.yticks(rotation=0)
 
     # Save figure
     plt.savefig(save_path)
@@ -191,6 +206,7 @@ def plot_confusion_matrix(cm, classes,
 
 
 def plot_multi_confusion_matrix(cf_mats, save_dir):
+    mpl.style.use("seaborn")
     print("Start to plot multi confusion matrix to ", save_dir)
     mkdirs(save_dir)
 
@@ -199,6 +215,62 @@ def plot_multi_confusion_matrix(cf_mats, save_dir):
         plot_confusion_matrix(cf_mat, LABELS, save_path)
 
     print("Plot {} confusion matrix to {} done".format(len(cf_mats), save_dir))
+
+
+def plot_bar_with_annot(x, y, xlabel, ylabel, title="", kind="barh", fig_save_dir=None, is_plot=True):
+    mkdirs(fig_save_dir)
+    x_offset = -0.03
+    y_offset = 0.01
+    mpl.style.use("seaborn")
+
+    # Sort by ascending score
+    arg_sorted = np.argsort(y)
+    x = np.sort(x)
+    y = y[arg_sorted]
+
+    fig, ax = plt.subplots()
+    ax.bar(x=x, height=y, color='C1', width=0.25)
+    ax.set(title=title, xlabel=xlabel, ylabel=ylabel)
+    ax.tick_params(rotation=0)
+
+    # Set lower and upper limit of y-axis
+    min_score = y.min()
+    max_score = y.max()
+    y_lim_min = (min_score - 0.2) if min_score > 0.2 else 0
+    y_lim_max = (max_score + 1) if max_score > 1 else 1
+    ax.set_ylim([y_lim_min, y_lim_max])
+
+    # Show value of each column to see clearly
+    for p in ax.patches:
+        b = p.get_bbox()
+        text_value = "{:.4f}".format(b.y1)
+        ax.annotate(text_value, xy=(b.x0 + x_offset, b.y1 + y_offset))
+
+    if fig_save_dir is not None:
+        fig_save_path = os.path.join(fig_save_dir, "{}.png".format(ylabel))
+        plt.savefig(fig_save_path)
+        print("Plot and save figure to {} done".format(fig_save_path))
+    if is_plot:
+        plt.show()
+
+
+def plot_multi_bar_with_annot(data_plot, fig_save_dir, is_plot=True):
+    mkdirs(fig_save_dir)
+    columns = list(data_plot.columns)
+    print("Start to plot and save {} figures to {} ...".format(len(columns) - 1, fig_save_dir))
+
+    print("Head of data plot")
+    print(data_plot.head())
+    mpl.style.use("seaborn")
+
+    xlabel = columns[0]
+    for ylabel in columns[1:]:
+        x = data_plot[xlabel].values
+        y = data_plot[ylabel].values
+        plot_bar_with_annot(x, y, xlabel, ylabel,
+                            title="{}-{}".format(ylabel, xlabel), fig_save_dir=fig_save_dir, is_plot=is_plot)
+
+    print("Plot {} figures done".format(len(columns) - 1))
 
 
 def split_data(data, test_size=0.2):
