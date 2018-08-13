@@ -195,11 +195,11 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         exec_time = time.time() - start_time
         print("Load encoded data (size = {}) from {} done. Time : {} seconds".format(
             len(labels), save_path, exec_time))
-        return vstack(encoded_docs), labels
+        return vstack(encoded_docs), np.array(labels)
 
 
 if __name__ == "__main__":
-    training_data_path = "./Dataset/data_train.json"
+    training_data_path = "./Dataset/training_data_4362.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 

@@ -217,7 +217,7 @@ def plot_multi_confusion_matrix(cf_mats, save_dir):
     print("Plot {} confusion matrix to {} done".format(len(cf_mats), save_dir))
 
 
-def plot_bar_with_annot(x, y, xlabel, ylabel, title="", kind="barh", fig_save_dir=None, is_plot=True):
+def plot_bar_with_annot(x, y, xlabel, ylabel, title="", fig_save_dir=None, is_plot=True):
     mkdirs(fig_save_dir)
     x_offset = -0.03
     y_offset = 0.01
@@ -267,8 +267,8 @@ def plot_multi_bar_with_annot(data_plot, fig_save_dir, is_plot=True):
     for ylabel in columns[1:]:
         x = data_plot[xlabel].values
         y = data_plot[ylabel].values
-        plot_bar_with_annot(x, y, xlabel, ylabel,
-                            title="{}-{}".format(ylabel, xlabel), fig_save_dir=fig_save_dir, is_plot=is_plot)
+        plot_bar_with_annot(x, y, xlabel, ylabel, title="{}-{}".format(ylabel, xlabel),
+                            fig_save_dir=fig_save_dir, is_plot=is_plot)
 
     print("Plot {} figures done".format(len(columns) - 1))
 

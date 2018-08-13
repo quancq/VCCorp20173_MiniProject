@@ -1,3 +1,0 @@
-Model,Hyper_Parameter,f1_macro,f1_micro,accuracy,Training_Time (Seconds)
-LightGBM,"{'n_estimators': 70, 'max_depth': 70, 'learning_rate': 0.25}",0.7994509023733575,0.8747478452228131,0.8747478452228131,831.5240747928619
-MultiNB,{'alpha': 0.004},0.8402505824442537,0.9081239684577297,0.9081239684577297,0.389681339263916

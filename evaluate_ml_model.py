@@ -9,7 +9,7 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 if __name__ == "__main__":
     # Load test data
     test_data_path = "./Dataset/valid_data_1091.json"
-    test_data = utils.load_data(test_data_path)[:300]
+    test_data = utils.load_data(test_data_path)
 
     df = pd.DataFrame(test_data)
     print("Head of test data:")
@@ -20,14 +20,18 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/2018-08-13_09-25-33"
+    model_dir = "./Model/2018-08-13_23-35-36"
     model.load_model(model_dir)
 
     # Evaluate
-    # metrics = ["f1_macro", "precision_macro", "recall_macro", "accuracy"]
     metrics = {
         "f1_macro": {"fn": f1_score, "params": {"average": "macro"}},
-        "accuracy": {"fn": accuracy_score}
+        "f1_micro": {"fn": f1_score, "params": {"average": "micro"}},
+        "accuracy": {"fn": accuracy_score},
+        "precision_macro": {"fn": precision_score, "params": {"average": "macro"}},
+        "precision_micro": {"fn": precision_score, "params": {"average": "micro"}},
+        "recall_macro": {"fn": recall_score, "params": {"average": "macro"}},
+        "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
     }
     result_df, cf_mats = model.evaluate(X_test, y_test, metrics)
 

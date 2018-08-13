@@ -94,7 +94,7 @@ class EnsembleModel:
             for metric_name in columns:
                 metric_fn = metrics.get(metric_name).get("fn")
                 metric_params = metrics.get(metric_name).get("params")
-                print("Score : {}, Params : {}".format(metric_name, metric_params))
+                # print("Score : {}, Params : {}".format(metric_name, metric_params))
                 if metric_params is None:
                     value_score = metric_fn(y_test, y_pred, LABELS)
                 else:
@@ -436,7 +436,7 @@ if __name__ == "__main__":
     # model.add_model("Bagging_MNB", bg_mnb_rs)
 
     # Train model
-    model.fit(X_train, y_train)
+    # model.fit(X_train, y_train)
 
     # Save model
-    model.save_model()
+    # model.save_model()

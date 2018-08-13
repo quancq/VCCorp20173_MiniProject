@@ -7,7 +7,7 @@ from hyper_parameters import MAP_LABEL_ID_TO_TEXT
 
 if __name__ == "__main__":
     # Load test data
-    test_data_path = "./Dataset/data_sent.json"
+    test_data_path = "./Dataset/valid_data_1091.json"
     test_data = utils.load_data(test_data_path)
 
     df = pd.DataFrame(test_data)
@@ -16,8 +16,9 @@ if __name__ == "__main__":
 
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
-    model_dir = "./Model/2018-08-13_01-56-01"
-    # model_dir = "./Model/2018-08-13_09-25-33"
+    # model_dir = "./Model/2018-08-13_01-56-01"
+    model_dir = "./Model/2018-08-13_22-36-31"
+
     model.load_model(model_dir)
 
     # Predict
