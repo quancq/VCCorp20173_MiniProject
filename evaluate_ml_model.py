@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/2018-08-13_23-35-36"
+    model_dir = "./Model/2018-08-14_09-04-43"
     model.load_model(model_dir)
 
     # Evaluate

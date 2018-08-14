@@ -21,7 +21,7 @@ from lightgbm import LGBMClassifier
 
 if __name__ == "__main__":
     # training_data_path = "./Dataset/data_train.json"
-    training_encoded_data_path = "./Dataset/encoded_training_data_4362.json"
+    training_encoded_data_path = "./Dataset/encoded_smote_training_data_16522.json"
     # training_data = utils.load_data(training_data_path)
     # X_train, y_train = utils.convert_orginal_data_to_list(training_data)
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
@@ -52,7 +52,7 @@ if __name__ == "__main__":
             "n_estimators": [20],
             # "min_samples_leaf": np.arange(2, 20, 5),
             "max_depth": [80],
-            "class_weight": ["balanced"],
+            # "class_weight": ["balanced"],
             "n_jobs": [-1]
         },
         n_iter=1,
@@ -120,18 +120,18 @@ if __name__ == "__main__":
     # model.add_model("LightGBM", lgbm_rs)
 
     # 5. Linear SVM
-    # linear_svm_gs = GridSearchCV(
-    #     estimator=LinearSVC(),
-    #     param_grid={
-    #         "C": [1.1845],
-    #         "class_weight": ["balanced"],
-    #     },
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    # )
-    # model.add_model("LinearSVM", linear_svm_gs)
+    linear_svm_gs = GridSearchCV(
+        estimator=LinearSVC(),
+        param_grid={
+            "C": [1.1845],
+            # "class_weight": ["balanced"],
+        },
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+    )
+    model.add_model("LinearSVM", linear_svm_gs)
 
     # 6. Kernel SVM
     # kernel_svm_rs = RandomizedSearchCV(
@@ -155,8 +155,8 @@ if __name__ == "__main__":
         estimator=LogisticRegression(),
         param_grid={
             "C": [1.83],
-            "class_weight": ["balanced"],
-            "n_jobs": [-1]
+            # "class_weight": ["balanced"],
+            # "n_jobs": [-1]
         },
         scoring=SCORING,
         refit=SCORING[0],

@@ -57,10 +57,10 @@ def convert_original_data_to_dict(data):
     return dic
 
 
-def plot_stats_count(data):
+def plot_stats_count(data, is_save=False):
     # Plot bar chart with x-axis is column 1, y-axis is column 2
-
-    ax = data.plot(kind="bar", x=0, y=1, legend=False, figsize=(12, 6), rot=0)
+    mpl.style.use("seaborn")
+    ax = data.plot(kind="bar", x=0, y=1, legend=False, figsize=(12, 6), rot=0, color="C1")
     col_names = list(data.columns.values)
     xlabel = col_names[0]
     ylabel = col_names[1]
@@ -79,9 +79,10 @@ def plot_stats_count(data):
         value = int(b.y1)
         ax.annotate(value, xy=((b.x0 + b.x1) / 2 + x_offset, b.y1 + y_offset))
 
-    fig_path = "./ExploreResult/{}-{}.png".format(xlabel, ylabel)
-    plt.savefig(fig_path, dpi=300)
-    print("Save figure to ", fig_path)
+    if is_save:
+        fig_path = "./ExploreResult/{}-{}.png".format(xlabel, ylabel)
+        plt.savefig(fig_path, dpi=300)
+        print("Save figure to ", fig_path)
     plt.show()
 
 
