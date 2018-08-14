@@ -10,7 +10,7 @@ def save_predicted_data(df, save_dir):
     for index, row in df.iterrows():
         predicted_data.append({
             "id": row["id"],
-            "label": row["label"],
+            "label": row["LabelID_Pred"],
             "content": row["content"]
         })
 
@@ -24,7 +24,7 @@ def save_predicted_data(df, save_dir):
 
 if __name__ == "__main__":
     # Load test data
-    test_data_path = "./Dataset/valid_data_1091.json"
+    test_data_path = "./Dataset/data_sent.json"
     test_data = utils.load_data(test_data_path)
 
     df = pd.DataFrame(test_data)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/2018-08-13_22-36-31"
+    model_dir = "./Model/Best_Model"
 
     model.load_model(model_dir)
 
@@ -49,8 +49,9 @@ if __name__ == "__main__":
 
     # Save predicted data
     # Cach 1
-    # save_path = os.path.join(model_dir, "predicted_data_{}_{}.csv".format(df.shape[0],utils.get_format_time_now()))
-    # df.to_csv(save_path, index=False)
+    save_path = os.path.join(model_dir, "predicted_data_{}_{}.csv".format(df.shape[0],utils.get_format_time_now()))
+    df.to_csv(save_path, index=False)
+    print("Save predicted data to {} done".format(save_path))
 
     # Cach 2
     save_dir = "./Dataset"

@@ -79,7 +79,7 @@ def get_under_sampling_ratio(labels):
 
 if __name__ == "__main__":
     # Load trining data
-    training_encoded_data_path = "./Dataset/encoded_training_data_4362.json"
+    training_encoded_data_path = "./Dataset/encoded_training_data_5453.json"
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
 
     unique_label = np.unique(y_train)
@@ -100,9 +100,9 @@ if __name__ == "__main__":
 
     # Under sampling
     under_ratio = get_under_sampling_ratio(new_y_train)
-    cc = EditedNearestNeighbours(random_state=RANDOM_STATE, ratio=under_ratio)
+    cc = ClusterCentroids(random_state=RANDOM_STATE, ratio=under_ratio)
     new_X_train, new_y_train = cc.fit_sample(new_X_train, new_y_train)
 
     # Save new data
-    training_new_encoded_data_path = "./Dataset/encoded_smote-enn_training_data_{}.json".format(new_y_train.shape[0])
+    training_new_encoded_data_path = "./Dataset/encoded_smote-cc_training_data_{}.json".format(new_y_train.shape[0])
     FeatureTransformer.save_encoded_data(new_X_train, new_y_train, training_new_encoded_data_path)

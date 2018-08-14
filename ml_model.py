@@ -86,6 +86,7 @@ class EnsembleModel:
         total_probs = []
         for name, model in self.models.items():
             classes = model["estimator"].classes_
+            print("Model {} start to predict proba".format(name))
             model["prob"] = model["estimator"].predict_proba(X)
             model["pred"] = classes[np.argmax(model["prob"], axis=1)]
             total_probs.append(np.array(model["prob"]))
@@ -113,7 +114,7 @@ class EnsembleModel:
             major_pred, _ = self.predict(X_test)
 
         # Save result predict to debug
-        pred_df = {"Ensemble": major_pred}
+        # pred_df = {"Ensemble": major_pred}
 
         # Evaluate models on metrics
         result = []
@@ -122,7 +123,7 @@ class EnsembleModel:
         for name, model in self.models.items():
             row = [name]
             y_pred = model["pred"]
-            pred_df.update({name: y_pred})
+            # pred_df.update({name: y_pred})
             for metric_name in columns:
                 metric_fn = metrics.get(metric_name).get("fn")
                 metric_params = metrics.get(metric_name).get("params")
@@ -138,10 +139,10 @@ class EnsembleModel:
             cf_mat = confusion_matrix(y_test, y_pred, labels=LABELS)
             cf_mats.update({name: cf_mat})
 
-        pred_df.update({"True_Label": y_test})
-        pred_df = pd.DataFrame(pred_df)
-        pred_df = pred_df[pred_df["Ensemble"] != pred_df["True_Label"]]
-        pred_df.to_csv("./Debug/pred.csv", index=False)
+        # pred_df.update({"True_Label": y_test})
+        # pred_df = pd.DataFrame(pred_df)
+        # pred_df = pred_df[pred_df["Ensemble"] != pred_df["True_Label"]]
+        # pred_df.to_csv("./Debug/pred.csv", index=False)
 
         # Evaluate ensemble model
         ensemble_model_name = "Ensemble"
