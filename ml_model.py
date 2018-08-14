@@ -80,9 +80,40 @@ class EnsembleModel:
         print("Model predict {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
         return self.major_votings, model_predict_rate
 
-    def evaluate(self, X_test, y_test, metrics):
+    def predict_proba(self, X):
+        start_time = time.time()
+        X = self.feature_transformer.transform(X)
+        total_probs = []
+        for name, model in self.models.items():
+            classes = model["estimator"].classes_
+            model["prob"] = model["estimator"].predict_proba(X)
+            model["pred"] = classes[np.argmax(model["prob"], axis=1)]
+            total_probs.append(np.array(model["prob"]))
+
+        # Major voting
+        total_prob_pred = total_probs[0]
+        model_predict_rate = []
+        for i in range(1, len(total_probs)):
+            total_prob_pred += total_probs[i]
+        total_prob_pred /= len(total_probs)
+        self.max_prob_pred = np.max(total_prob_pred, axis=1)
+        index_pred = np.argmax(total_prob_pred, axis=1)
+
+        self.label_pred = classes[index_pred]
+
+        finish_time = time.time()
+        print("Model predict proba {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
+        return self.label_pred, self.max_prob_pred
+
+    def evaluate(self, X_test, y_test, metrics, is_predict_proba=False):
         # Predict X_test
-        major_pred, _ = self.predict(X_test)
+        if is_predict_proba:
+            major_pred, _ = self.predict_proba(X_test)
+        else:
+            major_pred, _ = self.predict(X_test)
+
+        # Save result predict to debug
+        pred_df = {"Ensemble": major_pred}
 
         # Evaluate models on metrics
         result = []
@@ -91,6 +122,7 @@ class EnsembleModel:
         for name, model in self.models.items():
             row = [name]
             y_pred = model["pred"]
+            pred_df.update({name: y_pred})
             for metric_name in columns:
                 metric_fn = metrics.get(metric_name).get("fn")
                 metric_params = metrics.get(metric_name).get("params")
@@ -106,6 +138,11 @@ class EnsembleModel:
             cf_mat = confusion_matrix(y_test, y_pred, labels=LABELS)
             cf_mats.update({name: cf_mat})
 
+        pred_df.update({"True_Label": y_test})
+        pred_df = pd.DataFrame(pred_df)
+        pred_df = pred_df[pred_df["Ensemble"] != pred_df["True_Label"]]
+        pred_df.to_csv("./Debug/pred.csv", index=False)
+
         # Evaluate ensemble model
         ensemble_model_name = "Ensemble"
         row = [ensemble_model_name]
@@ -113,9 +150,9 @@ class EnsembleModel:
             metric_fn = metrics.get(metric_name).get("fn")
             metric_params = metrics.get(metric_name).get("params")
             if metric_params is None:
-                value_score = metric_fn(y_test, y_pred, LABELS)
+                value_score = metric_fn(y_test, major_pred, LABELS)
             else:
-                value_score = metric_fn(y_test, y_pred, LABELS, **metric_params)
+                value_score = metric_fn(y_test, major_pred, LABELS, **metric_params)
             row.append(value_score)
         result.append(row)
         cf_mats.update({ensemble_model_name: confusion_matrix(y_test, major_pred, labels=LABELS)})

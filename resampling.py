@@ -100,9 +100,9 @@ if __name__ == "__main__":
 
     # Under sampling
     under_ratio = get_under_sampling_ratio(new_y_train)
-    cc = ClusterCentroids(random_state=RANDOM_STATE, ratio=under_ratio)
+    cc = EditedNearestNeighbours(random_state=RANDOM_STATE, ratio=under_ratio)
     new_X_train, new_y_train = cc.fit_sample(new_X_train, new_y_train)
 
     # Save new data
-    training_new_encoded_data_path = "./Dataset/encoded_smote-cc_training_data_{}.json".format(new_y_train.shape[0])
+    training_new_encoded_data_path = "./Dataset/encoded_smote-enn_training_data_{}.json".format(new_y_train.shape[0])
     FeatureTransformer.save_encoded_data(new_X_train, new_y_train, training_new_encoded_data_path)

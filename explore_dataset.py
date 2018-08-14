@@ -8,7 +8,7 @@ from preprocessing import FeatureTransformer
 
 if __name__ == "__main__":
     # Load data to explore
-    training_file_path = "./Dataset/encoded_smote-cc_training_data_4480.json"
+    training_file_path = "./Dataset/encoded_smote-enn_training_data_4505.json"
     # test_file_path = "./Dataset/data_sent.json"
 
     # training_data = utils.load_data(training_file_path)
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     print(stats_by_label.head())
     print("Number distinct label : ", stats_by_label.shape[0])
 
-    utils.plot_stats_count(stats_by_label)
+    utils.plot_stats_count(stats_by_label, is_save=True)
 

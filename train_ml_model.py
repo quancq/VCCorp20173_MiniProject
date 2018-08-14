@@ -21,7 +21,7 @@ from lightgbm import LGBMClassifier
 
 if __name__ == "__main__":
     # training_data_path = "./Dataset/data_train.json"
-    training_encoded_data_path = "./Dataset/encoded_smote_training_data_16522.json"
+    training_encoded_data_path = "./Dataset/encoded_smote-cc_training_data_4480.json"
     # training_data = utils.load_data(training_data_path)
     # X_train, y_train = utils.convert_orginal_data_to_list(training_data)
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
@@ -31,7 +31,10 @@ if __name__ == "__main__":
     # 1. Multinomial Naive Bayes
     mnb_gs = GridSearchCV(
         MultinomialNB(),
-        param_grid={"alpha": [0.004]},
+        param_grid={
+            "alpha": [0.005]
+            # "alpha": np.arange(0.001, 0.02, 0.001)
+        },
         scoring=SCORING,
         refit=SCORING[0],
         cv=CV,
@@ -65,23 +68,23 @@ if __name__ == "__main__":
     model.add_model("RandomForest", rf_rs)
 
     # 3. Extra tree
-    # et_rs = RandomizedSearchCV(
-    #     ExtraTreesClassifier(),
-    #     param_distributions={
-    #         "n_estimators": [50],
-    #         "max_features": [0.3],
-    #         "max_depth": [70],
-    #         "class_weight": ["balanced"],
-    #         "n_jobs": [-1]
-    #     },
-    #     n_iter=1,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("ExtraTree", et_rs)
+    et_rs = RandomizedSearchCV(
+        ExtraTreesClassifier(),
+        param_distributions={
+            "n_estimators": [50],
+            "max_features": [0.3],
+            "max_depth": [70],
+            "class_weight": ["balanced"],
+            "n_jobs": [-1]
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("ExtraTree", et_rs)
 
     # AdaBoost
     # adb_rs = RandomizedSearchCV(
@@ -100,30 +103,31 @@ if __name__ == "__main__":
     # model.add_model("AdaBoost", adb_rs)
 
     # 4. LightGBM
-    # lgbm_rs = RandomizedSearchCV(
-    #     estimator=LGBMClassifier(),
-    #     param_distributions={
-    #         # "n_estimators": np.arange(40, 70, 10),
-    #         # "learning_rate": np.arange(0.15, 0.3, 0.05),
-    #         # "max_depth": np.arange(40, 60, 10),
-    #         "n_estimators": [50],
-    #         "learning_rate": [0.2],
-    #         "max_depth": [50],
-    #     },
-    #     n_iter=1,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("LightGBM", lgbm_rs)
+    lgbm_rs = RandomizedSearchCV(
+        estimator=LGBMClassifier(),
+        param_distributions={
+            # "n_estimators": np.arange(40, 70, 10),
+            # "learning_rate": np.arange(0.15, 0.3, 0.05),
+            # "max_depth": np.arange(40, 60, 10),
+            "n_estimators": [50],
+            "learning_rate": [0.2],
+            "max_depth": [50],
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("LightGBM", lgbm_rs)
 
     # 5. Linear SVM
     linear_svm_gs = GridSearchCV(
         estimator=LinearSVC(),
         param_grid={
-            "C": [1.1845],
+            # "C": [1.1845],
+            "C": [1.43]
             # "class_weight": ["balanced"],
         },
         scoring=SCORING,
@@ -134,21 +138,21 @@ if __name__ == "__main__":
     model.add_model("LinearSVM", linear_svm_gs)
 
     # 6. Kernel SVM
-    # kernel_svm_rs = RandomizedSearchCV(
-    #     estimator=SVC(),
-    #     param_distributions={
-    #         "C": [0.7],
-    #         "gamma": [0.4],
-    #         "kernel": ["rbf"]
-    #     },
-    #     n_iter=1,
-    #     scoring=SCORING,
-    #     refit=SCORING[0],
-    #     cv=CV,
-    #     return_train_score=False,
-    #     random_state=RANDOM_STATE
-    # )
-    # model.add_model("KernelSVM", kernel_svm_rs)
+    kernel_svm_rs = RandomizedSearchCV(
+        estimator=SVC(),
+        param_distributions={
+            "C": [0.7],
+            "gamma": [0.4],
+            "kernel": ["rbf"]
+        },
+        n_iter=1,
+        scoring=SCORING,
+        refit=SCORING[0],
+        cv=CV,
+        return_train_score=False,
+        random_state=RANDOM_STATE
+    )
+    model.add_model("KernelSVM", kernel_svm_rs)
 
     # 7. Logistic Regression
     lr_gs = GridSearchCV(

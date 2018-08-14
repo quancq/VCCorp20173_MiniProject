@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/2018-08-14_09-04-43"
+    model_dir = "./Model/2018-08-14_19-15-33"
     model.load_model(model_dir)
 
     # Evaluate
@@ -33,13 +33,14 @@ if __name__ == "__main__":
         "recall_macro": {"fn": recall_score, "params": {"average": "macro"}},
         "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
     }
-    result_df, cf_mats = model.evaluate(X_test, y_test, metrics)
+    is_predict_proba = False
+    result_df, cf_mats = model.evaluate(X_test, y_test, metrics, is_predict_proba=is_predict_proba)
 
     print("\nEvaluate result:")
     print(result_df)
 
     # Save confusion matrix figure
-    eval_save_dir = os.path.join(model_dir, "Evaluate")
+    eval_save_dir = os.path.join(model_dir, "Evaluate_Proba" if is_predict_proba else "Evaluate")
     cm_save_dir = os.path.join(eval_save_dir, "Confusion_Matrix")
     utils.plot_multi_confusion_matrix(cf_mats, cm_save_dir)
 
