@@ -80,7 +80,8 @@ def plot_stats_count(data, is_save=False):
         ax.annotate(value, xy=((b.x0 + b.x1) / 2 + x_offset, b.y1 + y_offset))
 
     if is_save:
-        fig_path = "./ExploreResult/{}-{}.png".format(xlabel, ylabel)
+        data_size = data[ylabel].sum()
+        fig_path = "./ExploreResult/{}-{}_{}.png".format(xlabel, ylabel, data_size)
         plt.savefig(fig_path, dpi=300)
         print("Save figure to ", fig_path)
     plt.show()
@@ -226,7 +227,7 @@ def plot_bar_with_annot(x, y, xlabel, ylabel, title="", fig_save_dir=None, is_pl
 
     # Sort by ascending score
     arg_sorted = np.argsort(y)
-    x = np.sort(x)
+    x = x[arg_sorted]
     y = y[arg_sorted]
 
     fig, ax = plt.subplots()
