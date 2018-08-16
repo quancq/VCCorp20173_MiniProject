@@ -106,7 +106,7 @@ class EnsembleModel:
         print("Model predict proba {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
         return self.label_pred, self.max_prob_pred
 
-    def evaluate(self, X_test, y_test, metrics, is_predict_proba=False):
+    def evaluate(self, X_test, y_test, metrics, labels, is_predict_proba=False):
         # Predict X_test
         if is_predict_proba:
             major_pred, _ = self.predict_proba(X_test)
@@ -128,10 +128,12 @@ class EnsembleModel:
                 metric_fn = metrics.get(metric_name).get("fn")
                 metric_params = metrics.get(metric_name).get("params")
                 # print("Score : {}, Params : {}".format(metric_name, metric_params))
+                # print(np.unique(y_test))
+                third_param = True if metric_name == "accuracy" else labels
                 if metric_params is None:
-                    value_score = metric_fn(y_test, y_pred, LABELS)
+                    value_score = metric_fn(y_test, y_pred, third_param)
                 else:
-                    value_score = metric_fn(y_test, y_pred, LABELS, **metric_params)
+                    value_score = metric_fn(y_test, y_pred, third_param, **metric_params)
                 row.append(value_score)
             result.append(row)
 
@@ -150,10 +152,11 @@ class EnsembleModel:
         for metric_name in columns:
             metric_fn = metrics.get(metric_name).get("fn")
             metric_params = metrics.get(metric_name).get("params")
+            third_param = True if metric_name == "accuracy" else labels
             if metric_params is None:
-                value_score = metric_fn(y_test, major_pred, LABELS)
+                value_score = metric_fn(y_test, major_pred, third_param)
             else:
-                value_score = metric_fn(y_test, major_pred, LABELS, **metric_params)
+                value_score = metric_fn(y_test, major_pred, third_param, **metric_params)
             row.append(value_score)
         result.append(row)
         cf_mats.update({ensemble_model_name: confusion_matrix(y_test, major_pred, labels=LABELS)})

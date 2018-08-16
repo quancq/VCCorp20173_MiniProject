@@ -20,21 +20,21 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/Best_Model"
+    model_dir = "./Model/22018-08-14_23-08-53"
     model.load_model(model_dir)
 
     # Evaluate
     metrics = {
         "f1_macro": {"fn": f1_score, "params": {"average": "macro"}},
-        "f1_micro": {"fn": f1_score, "params": {"average": "micro"}},
+        # "f1_micro": {"fn": f1_score, "params": {"average": "micro"}},
         "accuracy": {"fn": accuracy_score},
         "precision_macro": {"fn": precision_score, "params": {"average": "macro"}},
-        "precision_micro": {"fn": precision_score, "params": {"average": "micro"}},
+        # "precision_micro": {"fn": precision_score, "params": {"average": "micro"}},
         "recall_macro": {"fn": recall_score, "params": {"average": "macro"}},
-        "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
+        # "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
     }
     is_predict_proba = False
-    result_df, cf_mats = model.evaluate(X_test, y_test, metrics, is_predict_proba=is_predict_proba)
+    result_df, cf_mats = model.evaluate(X_test, y_test, metrics, labels=unique_labels, is_predict_proba=is_predict_proba)
 
     print("\nEvaluate result:")
     print(result_df)

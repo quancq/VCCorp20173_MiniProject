@@ -6,7 +6,7 @@ NUM_LABELS = 22
 MIN_OCCURRENCES_TOKEN = 3
 
 SCORING = ["f1_macro", "f1_micro", "accuracy"]
-CV = 2
+CV = 5
 RANDOM_STATE = 7
 VOCAB_PATH = "./Vocabulary/vocab_17012.csv"
 

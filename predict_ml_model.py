@@ -24,7 +24,7 @@ def save_predicted_data(df, save_dir):
 
 if __name__ == "__main__":
     # Load test data
-    test_data_path = "./Dataset/data_sent.json"
+    test_data_path = "./Dataset/data_test.json"
     test_data = utils.load_data(test_data_path)
 
     df = pd.DataFrame(test_data)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/Best_Model"
+    model_dir = "./Model/2018-08-14_23-08-53"
 
     model.load_model(model_dir)
 
