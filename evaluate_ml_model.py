@@ -7,8 +7,10 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 
 if __name__ == "__main__":
+    test_data_path = "./Dataset/data_test.json"
+    model_dir = "./Model/2018-08-14_23-08-53"
+
     # Load test data
-    test_data_path = "./Dataset/valid_data_1091.json"
     test_data = utils.load_data(test_data_path)
 
     df = pd.DataFrame(test_data)
@@ -16,11 +18,10 @@ if __name__ == "__main__":
     print(df.head())
     X_test = df.content.values
     y_test = df.label.values
+    unique_labels = np.unique(y_test)
 
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
-    # model_dir = "./Model/2018-08-13_01-56-01"
-    model_dir = "./Model/22018-08-14_23-08-53"
     model.load_model(model_dir)
 
     # Evaluate
@@ -34,7 +35,7 @@ if __name__ == "__main__":
         # "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
     }
     is_predict_proba = False
-    result_df, cf_mats = model.evaluate(X_test, y_test, metrics, labels=unique_labels, is_predict_proba=is_predict_proba)
+    result_df, cf_mats = model.evaluate(X_test, y_test, metrics, is_predict_proba=is_predict_proba)
 
     print("\nEvaluate result:")
     print(result_df)

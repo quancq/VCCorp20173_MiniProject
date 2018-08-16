@@ -8,7 +8,7 @@ from preprocessing import FeatureTransformer
 
 if __name__ == "__main__":
     # Load data to explore
-    training_file_path = "./Dataset/encoded_training_data_5453.json"
+    training_file_path = "./Dataset/encoded_training_data_345.json"
     # test_file_path = "./Dataset/data_sent.json"
 
     # training_data = utils.load_data(training_file_path)
@@ -29,8 +29,9 @@ if __name__ == "__main__":
     print("\nStatistic")
     # stats_by_label = training_df.label.value_counts().sort_index().reset_index()
     stats_by_label = pd.DataFrame(labels, columns=["label"]).label.value_counts().sort_index().reset_index()
-    cols = ["label", "total"]
+    cols = ["label", "total(%)"]
     stats_by_label.columns = cols
+    # stats_by_label["total"] = stats_by_label["total"] / stats_by_label["total"].sum() * 100
     print(stats_by_label.head())
     print("Number distinct label : ", stats_by_label.shape[0])
 

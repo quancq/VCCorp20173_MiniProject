@@ -49,24 +49,30 @@ Bài toán Text Classification
 * Các mô hình sử dụng và tham số:
     1. Multinomial Naive Bayes: alpha = 0.005
     2. Random Forest:
+    
     |Hyper-parameter|Value|
     |---------------|-----|
     |max_features   |0.8  |
     |n_estimators   |20   |
     |max_depth      |80   |
+    
     3. Extra Tree
+    
     |Hyper-parameter|Value|
     |---------------|-----|
     |max_features   |0.3  |
     |n_estimators   |50   |
     |max_depth      |70   |
     |class_weight   |"balanced"|
+    
     4. LightGMB
+    
     |Hyper-parameter|Value|
     |---------------|-----|
     |learning_rate  |0.2  |
     |n_estimators   |50   |
     |max_depth      |50   |
+    
     5. Linear SVM: C = 1.43
     6. Kernel SVM: C = 0.7, gamma = 0.4
     7. Logistic Regression: C = 1.83
@@ -76,12 +82,14 @@ Bài toán Text Classification
 # 4. Kết quả thực nghiệm
 * Kết quả trên tập validation (đây là cách kết hợp các mô hình đạt hiệu năng tốt nhất trên tập validation)
     * Tóm tắt kết quả:
+    
     |Metric|Score|
     |------|-----|
-    |f1-macro|0.8299|
-    |accuracy|0.9019|
-    |precision-macro|0.8712|
-    |recall-macro|0.8084|
+    |f1-macro|0.8312|
+    |accuracy|0.9038|
+    |precision-macro|0.8730|
+    |recall-macro|0.8093|
+    
     * f1-macro:
 ![](./Images_Readme/Evaluation_Validation/f1_macro.png)
     * Accuracy:
@@ -92,12 +100,14 @@ Bài toán Text Classification
     
 * Kết quả trên tập test (345 văn bản)
     * Tóm tắt kết quả:
+    
     |Metric|Score|
     |------|-----|
-    |f1-macro|0.6122|
-    |accuracy|0.6174|
-    |precision-macro|0.6923|
-    |recall-macro|0.6315|
+    |f1-macro|0.5924|
+    |accuracy|0.6203|
+    |precision-macro|0.6768|
+    |recall-macro|0.6060|
+    
     * f1-macro:
 ![](./Images_Readme/Evaluation_Test/f1_macro.png)
     * Accuracy:
@@ -105,4 +115,30 @@ Bài toán Text Classification
     * Confusion matrix
 ![](./Images_Readme/Evaluation_Test/Confusion_Matrix/Ensemble.png)
     * Các độ đo khác và confusion matrix của từng model: [đánh giá model trên tập test](./Images_Readme/Evaluation_Test)
+    
 # 5. Nhận xét
+
+* Kết quả trên tập test kém hơn rất nhiều so với kết quả trên tập validation
+    * Có thể do kích thước tập test chưa đủ lớn để đánh giá chính xác
+    * Phân bố của các class trong tập train ban đầu (5453 văn bản) và tập test có sự chênh lệch
+    ![](./Images_Readme/Compare_Distribution.png)
+    > Label 20 và 22 là minority label (sau đó được over sampling khá nhiều để tránh imbalanced class) nhưng lại *không* xuất hiện trong tập test. Trong tập test lại xuất hiện label 18 *chưa từng gặp* trong tập train !!!
+    * Có thể dữ liệu trong tập train không tổng quát hóa được dữ liệu trên tập test
+
+* Một số hướng mở rộng
+    * Thay vì *cứng nhắc* sử dụng major voting có thể thử nghiệm dùng phương pháp stacking
+    * Sử dụng Deep Learning (mạng LSTM)
+
+## 6. Hướng dẫn sử dụng
+* Predict
+    * Thay đổi 2 biến sau để dự đoán file test (2 biến này ở ngay sau dòng "if \__name__ == '\__main__'")
+        * test_data_path: đường dẫn file cần dự đoán
+        * model_dir: thư mục chứa model đã train
+    * Kết quả được lưu ở đường dẫn có dạng: "predicted_data_{0}_{1}.(csv|txt)", trong đó
+        * {0}: số văn bản trong tập test
+        * {1}: thời gian lúc dự đoán
+        * Có 2 file csv, txt ở 2 dạng output khác nhau nhưng kết quả dự đoán là giống nhau
+* Evaluate
+    * Điều chỉnh 2 biến giống như khi predict
+    * Kết quả đánh giá được lưu trong thư mục Evaluate trong thư mục của model đó
+* Best model hiện tại lưu trong "./Model/2018-08-14_23-08-53"

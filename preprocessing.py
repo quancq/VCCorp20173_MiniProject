@@ -211,7 +211,8 @@ if __name__ == "__main__":
     # ft.save_vocab(vocab_dir)
     # ft.print_stats_vocab(10)
     # vocab = ft.get_tfidf_vocab()
-    # utils.write_vocab(vocab, "./ExploreResult/vitoken_vocab_{}.txt".format(len(vocab)))
+    # new_vocab_path = "./Vocabulary/vocab_{}.txt".format(len(vocab))
+    # utils.write_vocab(vocab, new_vocab_path)
 
     # Save encoded documents
     ft = FeatureTransformer()

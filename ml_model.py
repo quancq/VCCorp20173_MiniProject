@@ -24,6 +24,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
+from sklearn.metrics import accuracy_score
 
 
 class EnsembleModel:
@@ -106,7 +107,7 @@ class EnsembleModel:
         print("Model predict proba {} docs done. Time : {:.4f} seconds".format(X.shape[0], finish_time - start_time))
         return self.label_pred, self.max_prob_pred
 
-    def evaluate(self, X_test, y_test, metrics, labels, is_predict_proba=False):
+    def evaluate(self, X_test, y_test, metrics, is_predict_proba=False):
         # Predict X_test
         if is_predict_proba:
             major_pred, _ = self.predict_proba(X_test)
@@ -129,7 +130,7 @@ class EnsembleModel:
                 metric_params = metrics.get(metric_name).get("params")
                 # print("Score : {}, Params : {}".format(metric_name, metric_params))
                 # print(np.unique(y_test))
-                third_param = True if metric_name == "accuracy" else labels
+                third_param = True if metric_name == "accuracy" else None
                 if metric_params is None:
                     value_score = metric_fn(y_test, y_pred, third_param)
                 else:
@@ -138,8 +139,9 @@ class EnsembleModel:
             result.append(row)
 
             # Calculate confusion matrix
-            cf_mat = confusion_matrix(y_test, y_pred, labels=LABELS)
-            cf_mats.update({name: cf_mat})
+            unique_label = np.unique(np.concatenate((y_test, y_pred)))
+            cf_mat = confusion_matrix(y_test, y_pred, unique_label)
+            cf_mats.update({name: (cf_mat, unique_label)})
 
         # pred_df.update({"True_Label": y_test})
         # pred_df = pd.DataFrame(pred_df)
@@ -152,14 +154,17 @@ class EnsembleModel:
         for metric_name in columns:
             metric_fn = metrics.get(metric_name).get("fn")
             metric_params = metrics.get(metric_name).get("params")
-            third_param = True if metric_name == "accuracy" else labels
+            third_param = True if metric_name == "accuracy" else None
             if metric_params is None:
                 value_score = metric_fn(y_test, major_pred, third_param)
             else:
                 value_score = metric_fn(y_test, major_pred, third_param, **metric_params)
             row.append(value_score)
         result.append(row)
-        cf_mats.update({ensemble_model_name: confusion_matrix(y_test, major_pred, labels=LABELS)})
+        unique_label = np.unique(np.concatenate((y_test, major_pred)))
+        cf_mats.update({ensemble_model_name: (confusion_matrix(y_test, major_pred, unique_label), unique_label)})
+
+        # print("\nmodel::evaluate Accuracy", accuracy_score(y_test, major_pred))
 
         columns = ["Model"] + columns
         result = pd.DataFrame(result, columns=columns)

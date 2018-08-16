@@ -60,10 +60,14 @@ def convert_original_data_to_dict(data):
 def plot_stats_count(data, is_save=False):
     # Plot bar chart with x-axis is column 1, y-axis is column 2
     mpl.style.use("seaborn")
-    ax = data.plot(kind="bar", x=0, y=1, legend=False, figsize=(12, 6), rot=0, color="C1")
+
     col_names = list(data.columns.values)
     xlabel = col_names[0]
     ylabel = col_names[1]
+    data_size = data[ylabel].sum()
+
+    data[ylabel] = data[ylabel] * 100 / data[ylabel].sum()
+    ax = data.plot(kind="bar", x=0, y=1, legend=False, figsize=(12, 6), rot=0, color="C1")
     ax.set(xlabel=xlabel, ylabel=ylabel)
 
     mean = data.iloc[:, 1].mean()
@@ -71,16 +75,16 @@ def plot_stats_count(data, is_save=False):
     ax.set_yticks(list(ax.get_yticks()) + [mean])
 
     x_offset = -0.3
-    y_offset = 5
+    y_offset = 0.3
 
     # add value into plot to see clearly
     for p in ax.patches:
         b = p.get_bbox()
-        value = int(b.y1)
+        value = "{:.2f}".format((b.y1))
         ax.annotate(value, xy=((b.x0 + b.x1) / 2 + x_offset, b.y1 + y_offset))
 
     if is_save:
-        data_size = data[ylabel].sum()
+
         fig_path = "./ExploreResult/{}-{}_{}.png".format(xlabel, ylabel, data_size)
         plt.savefig(fig_path, dpi=300)
         print("Save figure to ", fig_path)
@@ -212,9 +216,9 @@ def plot_multi_confusion_matrix(cf_mats, save_dir):
     print("Start to plot multi confusion matrix to ", save_dir)
     mkdirs(save_dir)
 
-    for model_name, cf_mat in cf_mats.items():
+    for model_name, (cf_mat, unique_label) in cf_mats.items():
         save_path = os.path.join(save_dir, "{}.png".format(model_name))
-        plot_confusion_matrix(cf_mat, LABELS, save_path)
+        plot_confusion_matrix(cf_mat, unique_label, save_path)
 
     print("Plot {} confusion matrix to {} done".format(len(cf_mats), save_dir))
 
