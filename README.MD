@@ -28,7 +28,7 @@ Bài toán Text Classification
 * Xây dựng từ điển
     * Sau khi tách từ tiếng Việt thì loại bỏ các từ xuất hiện ít hơn 3 lần và số chủ đề mà từ đó xuất hiện nhiều hơn 50% số chủ đề (tức là loại bỏ các từ xuất hiện trong nhiều hơn 11 chủ đề)
     * Loại bỏ stopword tiếng Việt
-    * Từ điền thu được: [vocabulary](./Vocabulary/vocab_17012.csv) gồm 17012 từ
+    * Từ điền thu được: [vocabulary](./Vocabulary) gồm 17012 từ (lấy từ file train gồm 5453 văn bản) và từ điển 15336 từ (lấy từ file train mới gồm 4362 văn bản)
 
 * Sử dụng Tf-Idf để biểu diễn một văn bản dưới dạng vector có số chiều bằng kích thước từ điển
 
@@ -39,7 +39,7 @@ Bài toán Text Classification
     * Under sampling bằng Cluster Centroid sau khi đã over sampling (chỉ under sampling những class có số văn bản > số văn bản trung bình)
     * Phân bố class trước khi resampling (4362 văn bản)
     ![](./Images_Readme/label-total_4362.png) 
-    * Phân bố class sau khi resampling (văn bản)
+    * Phân bố class sau khi resampling (4480 văn bản)
     ![](./Images_Readme/label-total_4480.png)
 
 # 3.2. Huấn luyện
