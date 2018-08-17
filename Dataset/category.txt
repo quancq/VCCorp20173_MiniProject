@@ -1,0 +1,24 @@
+cat_id	cat_name
+1		Điện tử & điện lạnh
+2		Viễn thông & truyền thông
+6		Du lịch & vận tải
+7		Việc làm & Giáo dục
+8		Hàng tiêu dùng
+9		Thực phẩm và đồ uống
+10		Y tế và Thuốc
+11		Chăm sóc sắc đẹp		
+12		Thời trang & trang sức
+13		Xây dựng và bất động sản
+14		Đồ nội thất, ngoại thất
+15		Nhà hàng, quán bar, trung tâm giải trí
+16		Ô tô - xe máy
+17		Tài chính, Bảo hiểm
+18		Bán buôn bán lẻ
+19		Luật & chính phủ
+20		Ngành công nghiệp, đặc thù
+21		Dịch vụ
+22		Kế toán - Kiểm toán
+23		Game
+24		Mẹ và bé
+156		Hàng không: hãng hàng không, phòng vé,...
+188		Thể thao

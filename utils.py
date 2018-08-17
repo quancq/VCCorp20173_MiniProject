@@ -321,6 +321,29 @@ class MyEncoder(json.JSONEncoder):
             return super(MyEncoder, self).default(obj)
 
 
+def filter_data_by_id(data, remove_ids):
+    print("Before remove ids ({}), data size = {}".format(remove_ids, len(data)))
+    filtered_data = []
+    for data_point in data:
+        if data_point["id"] not in remove_ids:
+            filtered_data.append(data_point)
+
+    print("After remove ids ({}), data size = {}".format(remove_ids, len(filtered_data)))
+    return filtered_data
+
+
+def filter_data_by_label(X, y, remove_labels):
+    print("Before remove labels ({}), data size = {}".format(remove_labels, y.shape))
+    filter_X, filter_y = [], []
+    for i, j in zip(X, y):
+        if j not in remove_labels:
+            filter_X.append(i)
+            filter_y.append(j)
+
+    print("After remove labels ({}), data size = {}".format(remove_labels, len(filter_y)))
+    return np.array(filter_X), np.array(filter_y)
+
+
 if __name__ == "__main__":
     # training_file_path = "./Dataset/data_train.json"
     # test_file_path = "./Dataset/data_sent.json"

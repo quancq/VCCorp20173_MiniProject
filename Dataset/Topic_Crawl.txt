@@ -1,0 +1,10 @@
+cat_id	cat_name
+2		Viễn thông & truyền thông
+6		Du lịch & vận tải
+7		Việc làm & Giáo dục
+10		Y tế và Thuốc		
+14		Đồ nội thất, ngoại thất
+15		Nhà hàng, quán bar, trung tâm giải trí
+17		Tài chính, Bảo hiểm
+156		Hàng không: hãng hàng không, phòng vé,...
+188		Thể thao

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import utils, os
 from ml_model import EnsembleModel, VOCAB_PATH, SCORING
-from hyper_parameters import MAP_LABEL_ID_TO_TEXT
+from hyper_parameters import MAP_LABEL_ID_TO_TEXT, REMOVE_DOC_IDS, REMOVE_LABEL_IDS
 from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, recall_score, accuracy_score, confusion_matrix
 
 
@@ -12,12 +12,14 @@ if __name__ == "__main__":
 
     # Load test data
     test_data = utils.load_data(test_data_path)
+    test_data = utils.filter_data_by_id(test_data, REMOVE_DOC_IDS)
 
     df = pd.DataFrame(test_data)
     print("Head of test data:")
     print(df.head())
     X_test = df.content.values
     y_test = df.label.values
+    X_test, y_test = utils.filter_data_by_label(X_test, y_test, REMOVE_LABEL_IDS)
     unique_labels = np.unique(y_test)
 
     # Load model
