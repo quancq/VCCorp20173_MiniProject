@@ -8,7 +8,7 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 if __name__ == "__main__":
     test_data_path = "./Dataset/new_data_test.json"
-    model_dir = "./Model/2018-08-18_23-37-22"
+    model_dir = "./Model/2018-08-20_00-38-28"
 
     # Load test data
     test_data = utils.load_data(test_data_path)
@@ -27,6 +27,10 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     model.load_model(model_dir)
+    model.remove_model("KNN")
+    model.remove_model("RandomForest")
+    model.remove_model("ExtraTree")
+    model.remove_model("LightGBM")
 
     # Evaluate
     metrics = {

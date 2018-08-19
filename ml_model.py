@@ -44,6 +44,10 @@ class EnsembleModel:
             }
         })
 
+    def remove_model(self, name):
+        del self.models[name]
+        print("Remove model {} done".format(name))
+
     def fit(self, X, y, is_encoded_data=True):
         if not is_encoded_data:
             # Transform raw document to document presentation

@@ -195,7 +195,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
 
 if __name__ == "__main__":
-    training_data_path = "./Dataset/new_data_train.json"
+    training_data_path = "./Dataset/new_data_train_5853.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
