@@ -8,7 +8,7 @@ from preprocessing import FeatureTransformer
 
 if __name__ == "__main__":
     # Load data to explore
-    training_file_path = "./Dataset/encoded_training_data_345.json"
+    training_file_path = "./Dataset/encoded_training_data_5753.json"
     # test_file_path = "./Dataset/data_sent.json"
 
     # training_data = utils.load_data(training_file_path)

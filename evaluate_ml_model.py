@@ -7,19 +7,21 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 
 if __name__ == "__main__":
-    test_data_path = "./Dataset/data_test.json"
-    model_dir = "./Model/2018-08-14_23-08-53"
+    test_data_path = "./Dataset/new_data_test.json"
+    model_dir = "./Model/2018-08-18_23-37-22"
 
     # Load test data
     test_data = utils.load_data(test_data_path)
-    test_data = utils.filter_data_by_id(test_data, REMOVE_DOC_IDS)
+
+    # Filter test data
+    test_data = utils.filter_data_by_attrib(test_data, "id", REMOVE_DOC_IDS)
+    test_data = utils.filter_data_by_attrib(test_data, "label", REMOVE_LABEL_IDS)
 
     df = pd.DataFrame(test_data)
     print("Head of test data:")
     print(df.head())
     X_test = df.content.values
     y_test = df.label.values
-    X_test, y_test = utils.filter_data_by_label(X_test, y_test, REMOVE_LABEL_IDS)
     unique_labels = np.unique(y_test)
 
     # Load model
@@ -53,3 +55,13 @@ if __name__ == "__main__":
     result_save_path = os.path.join(eval_save_dir, "evaluate_{}.csv".format(len(y_test)))
     result_df.to_csv(result_save_path, index=False)
     print("Save file evaluate to {} done".format(result_save_path))
+
+    # Save file contain y_pred and y_true
+    y_pred, prob_pred = model.predict(X_test)
+    df["LabelID_Pred"] = y_pred
+    df["Label_Pred"] = [MAP_LABEL_ID_TO_TEXT.get(label_id, "Unknown") for label_id in y_pred]
+    df["Prob_Pred"] = prob_pred
+
+    save_path = os.path.join(eval_save_dir, "evaluate_data_{}_{}.csv".format(df.shape[0], utils.get_format_time_now()))
+    df.to_csv(save_path, index=False)
+    print("Save file compare y_true and y_pred to {} done".format(save_path))

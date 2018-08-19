@@ -151,10 +151,6 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         print("Use vocabulary size    : ", len(self.vocab))
         # print("Tf-idf vocabulary size : ", len(self.get_tfidf_vocab()))
 
-        # print("Và :", self.vocab.get("và"), self.vocab.get("Và"))
-        # print("Là :", self.vocab.get("là"), self.vocab.get("Là"))
-        # print("Được :", self.vocab.get("được"), self.vocab.get("ĐưỢc"))
-
     @staticmethod
     def save_encoded_data(encoded_docs, labels, save_path):
         print("Start to save encoded data to ", save_path)
@@ -199,7 +195,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
 
 if __name__ == "__main__":
-    training_data_path = "./Dataset/training_data_4362.json"
+    training_data_path = "./Dataset/new_data_train.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
@@ -210,9 +206,6 @@ if __name__ == "__main__":
     # vocab_dir = "./Vocabulary/"
     # ft.save_vocab(vocab_dir)
     # ft.print_stats_vocab(10)
-    # vocab = ft.get_tfidf_vocab()
-    # new_vocab_path = "./Vocabulary/vocab_{}.txt".format(len(vocab))
-    # utils.write_vocab(vocab, new_vocab_path)
 
     # Save encoded documents
     ft = FeatureTransformer()

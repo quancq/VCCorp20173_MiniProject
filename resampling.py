@@ -79,7 +79,7 @@ def get_under_sampling_ratio(labels):
 
 if __name__ == "__main__":
     # Load trining data
-    training_encoded_data_path = "./Dataset/encoded_training_data_4362.json"
+    training_encoded_data_path = "./Dataset/encoded_training_data_5753.json"
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
 
     unique_label = np.unique(y_train)
