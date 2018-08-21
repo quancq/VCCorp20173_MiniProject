@@ -2,15 +2,15 @@ Bài toán Text Classification
 ============================
 # 1. Xác định bài toán
 ## Đề bài
-* Input: Tập các văn bản và thể loại tương ứng của mỗi văn bản
-* Output: Với mỗi văn bản mới cần xác định thể loại của văn bản đó
+* Input: Tập các văn bản và thể loại tương ứng của mỗi văn bản ([File data train - 4386 văn bản](./Dataset/data_train_4386.json))
+* Output: Với mỗi văn bản mới cần xác định thể loại của văn bản đó ([File data test - 774 văn bản](./Dataset/data_test_774.json))
 ## Kiểu bài toán
 * Đây là bài toán multi-class classification
 
 # 2. Khám phá dữ liệu
 * Đây là văn bản tiếng việt => Cần có kĩ thuật **tách từ** dành cho tiếng việt
-* Phân bố các class trong tập dữ liệu huấn luyện (gồm 5453 văn bản và 22 chủ đề)
-![](./Images_Readme/label-total_5453.png) 
+* Phân bố các class trong tập dữ liệu huấn luyện (gồm 4386 văn bản và 23 chủ đề)
+![](./Images_Readme/label-total_4386.png) 
 > Đây là bài toán **imbalanced class** => Cần resampling dữ liệu và thêm trọng số class khi train model
 
 # 3. Giải quyết bài toán
@@ -28,40 +28,33 @@ Bài toán Text Classification
 * Xây dựng từ điển
     * Sau khi tách từ tiếng Việt thì loại bỏ các từ xuất hiện ít hơn 3 lần và số chủ đề mà từ đó xuất hiện nhiều hơn 50% số chủ đề (tức là loại bỏ các từ xuất hiện trong nhiều hơn 11 chủ đề)
     * Loại bỏ stopword tiếng Việt
-    * Từ điền thu được: [vocabulary](./Vocabulary) gồm 17012 từ (lấy từ file train gồm 5453 văn bản) và từ điển 15336 từ (lấy từ file train mới gồm 4362 văn bản)
+    * Từ điền thu được: [vocabulary](./Vocabulary/vocab_15531.csv) gồm 15531 từ (lấy từ file train gồm 4386 văn bản)
 
 * Sử dụng Tf-Idf để biểu diễn một văn bản dưới dạng vector có số chiều bằng kích thước từ điển
 
 # 3.1.4. Resampling dataset
-* Tách tập dữ liệu input (5453 văn bản) thành tập train (4362 văn bản) và tập validation (1091 văn bản) (tỉ lệ 80%-20% và 2 tập dữ liệu mới này có **cùng phân bố class**)
-* Do tập dữ liệu là imbalanced class nên cần phải **resampling** trên tập train mới:
-    * Over sampling bằng SMOTE (chỉ over sampling những class có số văn bản < số văn bản trung bình của mỗi class)
-    * Under sampling bằng Cluster Centroid sau khi đã over sampling (chỉ under sampling những class có số văn bản > số văn bản trung bình)
-    * Phân bố class trước khi resampling (4362 văn bản)
-    ![](./Images_Readme/label-total_4362.png) 
-    * Phân bố class sau khi resampling (4480 văn bản)
-    ![](./Images_Readme/label-total_4480.png)
+* Hiện tại không áp dụng phương pháp này
 
 # 3.2. Huấn luyện
 * Xác định độ đo metric đánh giá hiệu năng mô hình: **f1-macro** (do đây là bài toán imbalanced class)
-* Sử dụng một vài mô hình classification kết hợp với hyper-parameter tuning (dùng grid và random search chọn ra tham số đạt hiệu năng tốt nhất đo bằng cross-validation trên tập train). Sau đó dùng major voting để đưa ra kết quả cuối cùng và dùng tập validation để chọn ra các mô hình nào mà kết quả của major-voting đưa ra là tốt nhất trên tập validation
-* Sau khi xác định được các bộ tham số tốt thì train lại toàn bộ các mô hình với các tham số này trên toàn bộ dữ liệu ban đầu gồm (5453 văn bản)
+* Sử dụng một vài mô hình classification kết hợp với hyper-parameter tuning (dùng grid và random search chọn ra tham số đạt hiệu năng tốt nhất đo bằng cross-validation (Chọn K-Fold = 5) trên tập train).
+* Sau khi xác định được các bộ tham số tốt thì train lại toàn bộ các mô hình với các tham số này trên toàn bộ dữ liệu train gồm (4386 văn bản)
 * Các mô hình sử dụng và tham số:
-    1. Multinomial Naive Bayes: alpha = 0.005
+    1. Multinomial Naive Bayes: alpha = 0.0004
     2. Random Forest:
     
     |Hyper-parameter|Value|
     |---------------|-----|
-    |max_features   |0.8  |
-    |n_estimators   |20   |
-    |max_depth      |80   |
+    |max_features   |0.7  |
+    |n_estimators   |15   |
+    |max_depth      |75   |
     
     3. Extra Tree
     
     |Hyper-parameter|Value|
     |---------------|-----|
     |max_features   |0.3  |
-    |n_estimators   |50   |
+    |n_estimators   |60   |
     |max_depth      |70   |
     |class_weight   |"balanced"|
     
@@ -73,40 +66,36 @@ Bài toán Text Classification
     |n_estimators   |50   |
     |max_depth      |50   |
     
-    5. Linear SVM: C = 1.43
-    6. Kernel SVM: C = 0.7, gamma = 0.4
-    7. Logistic Regression: C = 1.83
-    8. KNN: n_neighbors = 9, weights = "distance"
+    5. Linear SVM: C = 0.445
+    6. Kernel SVM:
+    
+    |Hyper-parameter|Value|
+    |---------------|-----|
+    |C              |0.7  |
+    |gamma          |0.6  |
+    |Kernel         |rbf  |
+    
+    7. Logistic Regression: C = 2.13
+    8. KNN: n_neighbors = 5, weights = "distance"
     
     
 # 4. Kết quả thực nghiệm
-* Kết quả trên tập validation (đây là cách kết hợp các mô hình đạt hiệu năng tốt nhất trên tập validation)
-    * Tóm tắt kết quả:
-    
-    |Metric|Score|
-    |------|-----|
-    |f1-macro|0.8312|
-    |accuracy|0.9038|
-    |precision-macro|0.8730|
-    |recall-macro|0.8093|
+* Kết quả đo trung bình khi sử dụng cross-validation trên tập train
     
     * f1-macro:
 ![](./Images_Readme/Evaluation_Validation/f1_macro.png)
     * Accuracy:
 ![](./Images_Readme/Evaluation_Validation/accuracy.png)
-    * Confusion matrix
-![](./Images_Readme/Evaluation_Validation/Confusion_Matrix/Ensemble.png)
-    * Các độ đo khác và confusion matrix của từng model: [đánh giá model trên tập validation](./Images_Readme/Evaluation_Validation)
     
-* Kết quả trên tập test (345 văn bản)
+* Kết quả trên tập test (774 văn bản)
     * Tóm tắt kết quả:
     
     |Metric|Score|
     |------|-----|
-    |f1-macro|0.5924|
-    |accuracy|0.6203|
-    |precision-macro|0.6768|
-    |recall-macro|0.6060|
+    |f1-macro|0.8359|
+    |accuracy|0.9018|
+    |precision-macro|0.8739|
+    |recall-macro|0.8138|
     
     * f1-macro:
 ![](./Images_Readme/Evaluation_Test/f1_macro.png)
@@ -114,16 +103,10 @@ Bài toán Text Classification
 ![](./Images_Readme/Evaluation_Test/accuracy.png)
     * Confusion matrix
 ![](./Images_Readme/Evaluation_Test/Confusion_Matrix/Ensemble.png)
-    * Các độ đo khác và confusion matrix của từng model: [đánh giá model trên tập test](./Images_Readme/Evaluation_Test)
+    * Các confusion matrix của từng model: [đánh giá model trên tập test](./Images_Readme/Evaluation_Test/Confusion_Matrix)
+    * File so sánh nhãn dự đoán của model và nhãn đúng của file test ([File dự đoán](./Images_Readme/Evaluation_Test/evaluate_data_774_2018-08-21_00-05-18.csv))
     
 # 5. Nhận xét
-
-* Kết quả trên tập test kém hơn rất nhiều so với kết quả trên tập validation
-    * Có thể do kích thước tập test chưa đủ lớn để đánh giá chính xác
-    * Phân bố của các class trong tập train ban đầu (5453 văn bản) và tập test có sự chênh lệch
-    ![](./Images_Readme/Compare_Distribution.png)
-    > Label 20 và 22 là minority label (sau đó được over sampling khá nhiều để tránh imbalanced class) nhưng lại *không* xuất hiện trong tập test. Trong tập test lại xuất hiện label 18 *chưa từng gặp* trong tập train !!!
-    * Có thể dữ liệu trong tập train không tổng quát hóa được dữ liệu trên tập test
 
 * Một số hướng mở rộng
     * Thay vì *cứng nhắc* sử dụng major voting có thể thử nghiệm dùng phương pháp stacking
@@ -141,4 +124,4 @@ Bài toán Text Classification
 * Evaluate
     * Điều chỉnh 2 biến giống như khi predict
     * Kết quả đánh giá được lưu trong thư mục Evaluate trong thư mục của model đó
-* Best model hiện tại lưu trong "./Model/2018-08-14_23-08-53"
+* Best model hiện tại lưu trong "./Model/2018-08-20_23-57-43"

@@ -24,11 +24,33 @@ def lower(s):
     return str(s, "utf8").lower().encode("utf8")
 
 
+def mkdirs(dir):
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
+
+def mkdirs_of_path(file_path):
+    dir_path = get_dir_path(file_path)
+    mkdirs(dir_path)
+
+
+def get_dir_path(save_path):
+    return save_path[:save_path.rfind("/")]
+
+
 def load_data(file_path):
     with open(file_path, 'r', encoding="utf-8") as f:
         data = json.load(f)
     print("Read file {} done. Data size : {}".format(file_path, len(data)))
     return data
+
+
+def save_json(data, save_path):
+    mkdirs_of_path(save_path)
+    with open(save_path, 'w') as f:
+        json.dump(data, f, ensure_ascii=False)
+
+    print("Save json data (size = {}) to {} done".format(len(data), save_path))
 
 
 def convert_original_data_to_df(data):
@@ -66,7 +88,7 @@ def plot_stats_count(data, is_save=False):
     ylabel = col_names[1]
     data_size = data[ylabel].sum()
 
-    data[ylabel] = data[ylabel] * 100 / data[ylabel].sum()
+    # data[ylabel] = data[ylabel] * 100 / data[ylabel].sum()
     ax = data.plot(kind="bar", x=0, y=1, legend=False, figsize=(12, 6), rot=0, color="C1")
     ax.set(xlabel=xlabel, ylabel=ylabel)
 
@@ -80,7 +102,7 @@ def plot_stats_count(data, is_save=False):
     # add value into plot to see clearly
     for p in ax.patches:
         b = p.get_bbox()
-        value = "{:.2f}".format((b.y1))
+        value = int(b.y1)
         ax.annotate(value, xy=((b.x0 + b.x1) / 2 + x_offset, b.y1 + y_offset))
 
     if is_save:
@@ -333,14 +355,15 @@ def filter_data_by_attrib(data, attrib, remove_ids):
 
 
 if __name__ == "__main__":
-    # training_file_path = "./Dataset/data_train.json"
-    # test_file_path = "./Dataset/data_sent.json"
-    #
-    # training_data = load_data(training_file_path)
-    # training_size = len(training_data)
-    # test_data = load_data(test_file_path)
-    # test_size = len(test_data)
+    training_file_path = "./Dataset/json_train_new_v2.json"
+    training_data = load_data(training_file_path)
 
-    words = ["Và", "CÓ", "ĐưỢc", "KhÔnG", "Ộ uẾ qUá NặnG", "Ả á à Ê"]
-    for word in words:
-        print("Original word : {} - Lower : {} - Upper : {}".format(word, lower(word), upper(word)))
+    # Split data into two parts
+    training_data, test_data = split_data(training_data, test_size=0.15)
+    new_training_file_path = "./Dataset/data_train_{}.json".format(len(training_data))
+    new_test_file_path = "./Dataset/data_test_{}.json".format(len(test_data))
+
+    # Save data
+    save_json(training_data, new_training_file_path)
+    save_json(test_data, new_test_file_path)
+

@@ -22,7 +22,7 @@ from lightgbm import LGBMClassifier
 
 if __name__ == "__main__":
     # training_data_path = "./Dataset/data_train.json"
-    training_encoded_data_path = "./Dataset/encoded_smote-cc_training_data_6024.json"
+    training_encoded_data_path = "./Dataset/encoded_training_data_4386.json"
     # training_data = utils.load_data(training_data_path)
     # X_train, y_train = utils.convert_orginal_data_to_list(training_data)
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         MultinomialNB(),
         param_grid={
             # "alpha": [0.005]
-            "alpha": [0.0075]
+            "alpha": [0.0004]
         },
         scoring=SCORING,
         refit=SCORING[0],
@@ -47,16 +47,16 @@ if __name__ == "__main__":
     rf_rs = RandomizedSearchCV(
         RandomForestClassifier(),
         param_distributions={
-            # "max_features": np.arange(0.6, 1, 0.1),
-            # "n_estimators": np.arange(10, 40, 5),
+            # "max_features": np.arange(0.6, 0.9, 0.1),
+            # "n_estimators": [15],
             # # "min_samples_leaf": np.arange(2, 20, 5),
-            # "max_depth": np.arange(50, 90, 5),
+            # "max_depth": np.arange(60, 80, 5),
             # "class_weight": ["balanced"],
-            "max_features": [0.8],
-            "n_estimators": [20],
+            "max_features": [0.7],
+            "n_estimators": [15],
             # "min_samples_leaf": np.arange(2, 20, 5),
-            "max_depth": [80],
-            # "class_weight": ["balanced"],
+            "max_depth": [75],
+            # # "class_weight": ["balanced"],
             "n_jobs": [-1]
         },
         n_iter=1,
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     et_rs = RandomizedSearchCV(
         ExtraTreesClassifier(),
         param_distributions={
-            "n_estimators": [50],
+            "n_estimators": [60],
             "max_features": [0.3],
             "max_depth": [70],
             "class_weight": ["balanced"],
@@ -129,7 +129,7 @@ if __name__ == "__main__":
         param_grid={
             # "C": [1.1845],
             # "C": [1.43]
-            "C": [0.85]
+            "C": [0.445]
             # "class_weight": ["balanced"],
         },
         scoring=SCORING,
@@ -143,8 +143,11 @@ if __name__ == "__main__":
     kernel_svm_rs = RandomizedSearchCV(
         estimator=SVC(),
         param_distributions={
+            # "C": [0.7],
+            # "gamma": [0.4],
+            # "kernel": ["rbf"]
             "C": [0.7],
-            "gamma": [0.4],
+            "gamma": [0.6],
             "kernel": ["rbf"]
         },
         n_iter=1,
@@ -161,7 +164,7 @@ if __name__ == "__main__":
         estimator=LogisticRegression(),
         param_grid={
             # "C": [1.83],
-            "C": [1.87]
+            "C": [2.13]
             # "class_weight": ["balanced"],
             # "n_jobs": [-1]
         },
@@ -176,7 +179,7 @@ if __name__ == "__main__":
     knn_rs = RandomizedSearchCV(
         estimator=KNeighborsClassifier(),
         param_distributions={
-            "n_neighbors": [1],
+            "n_neighbors": [5],
             "weights": ["distance"],
         },
         n_iter=1,

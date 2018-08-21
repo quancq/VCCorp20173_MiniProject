@@ -1,0 +1,20 @@
+Các vấn đề về dữ liệu (đây là nguyên nhân khiến mô hình không thể đạt kết quả tốt):
+1. Nhãn 1 số văn bản trong file test bị gán sai so với ngữ nghĩa và so với dữ liệu trong file train
+- Văn bản 1,3,7,8 (trong file test nhãn là 1 nhưng trong file train là 21)
+- Văn bản 10 (nhãn đúng phải là 21)
+- Văn bản 26 (nhãn trong file test nhãn là 10 nhưng trong file train là 19)
+- Văn bản 95 (nhãn trong file test nhãn là 15 nhưng nhãn đúng về nghĩa là 13)
+- Văn bản 98 (nhãn trong file test nhãn là 15 nhưng nhãn đúng về nghĩa là 21)
+- Văn bản 119 (nhãn trong file test nhãn là 156 nhưng trong file train là 19)
+- Các văn bản 190, 198, 266, 280, 330, và 1 số khác nữa cũng sai nhãn.
+- 1 số nhãn của thể loại 17 trong file test không thuộc thể loại nào.
+
+2. Sự không nhất quán giữa các văn bản trong file train
+- Search 'cung cấp sỉ' trong file train sẽ thấy có bài về cung cấp sỉ chả cá thì thuộc nhãn 21 (dịch vụ) nhưng cung cấp sỉ thịt dê tươi thì thuộc nhãn 15 (nhà hàng, quán bar...)
+- Search 'nguồn cấp' trong file train sẽ thấy có rất nhiều bài giống nhau nhưng đều thuộc nhãn 1 và nhãn 21
+- ...
+
+3. Các thể loại có sự chồng chéo về ngữ nghĩa nên khó phân loại đúng
+- Bài về quy định về bảo hiểm y tế có thể có nhãn là 17 (tài chính - bảo hiểm), 19 (luật - chính phủ), 10 (y tế)
+- Bài về dịch vụ đặt phòng khách sạn có thể có nhãn là 21 (dịch vụ), 6 (du lịch), 15(quán bar, trung tâm giải trí)
+- Bài về công ty cung cấp máy phát điện có thể có nhãn là 1 (điện tử - điện lạnh), 8 (hàng tiêu dùng), 21 (dịch vụ)

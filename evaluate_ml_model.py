@@ -7,15 +7,15 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 
 if __name__ == "__main__":
-    test_data_path = "./Dataset/new_data_test.json"
-    model_dir = "./Model/2018-08-20_00-38-28"
+    test_data_path = "./Dataset/data_test_774.json"
+    model_dir = "./Model/2018-08-20_23-57-43"
 
     # Load test data
     test_data = utils.load_data(test_data_path)
 
     # Filter test data
-    test_data = utils.filter_data_by_attrib(test_data, "id", REMOVE_DOC_IDS)
-    test_data = utils.filter_data_by_attrib(test_data, "label", REMOVE_LABEL_IDS)
+    # test_data = utils.filter_data_by_attrib(test_data, "id", REMOVE_DOC_IDS)
+    # test_data = utils.filter_data_by_attrib(test_data, "label", REMOVE_LABEL_IDS)
 
     df = pd.DataFrame(test_data)
     print("Head of test data:")
@@ -27,10 +27,10 @@ if __name__ == "__main__":
     # Load model
     model = EnsembleModel(SCORING, VOCAB_PATH)
     model.load_model(model_dir)
-    model.remove_model("KNN")
-    model.remove_model("RandomForest")
-    model.remove_model("ExtraTree")
-    model.remove_model("LightGBM")
+    # model.remove_model("KNN")
+    # model.remove_model("RandomForest")
+    # model.remove_model("ExtraTree")
+    # model.remove_model("LightGBM")
 
     # Evaluate
     metrics = {

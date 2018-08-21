@@ -1,0 +1,3 @@
+Model,Hyper_Parameter,f1_macro,accuracy,Training_Time (Seconds)
+RandomForest,"{'n_estimators': 20, 'max_depth': 85, 'n_jobs': -1, 'max_features': 0.6}",0.8143013006594056,0.800132802124834,167.8024730682373
+MultiNB,{'alpha': 0.0075},0.8787669375393726,0.877324037184595,0.2746555805206299

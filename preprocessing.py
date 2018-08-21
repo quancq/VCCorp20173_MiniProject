@@ -195,7 +195,7 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
 
 
 if __name__ == "__main__":
-    training_data_path = "./Dataset/new_data_train_5853.json"
+    training_data_path = "./Dataset/data_train_4386.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
@@ -222,8 +222,8 @@ if __name__ == "__main__":
     y_after = y_train_new[-5:]
 
     print("Compare : ", np.sum(X_before != X_after), np.sum(y_before != y_after))
-    # print(X_before)
-
-    print("\n\n===============")
+    # # print(X_before)
+    #
+    # print("\n\n===============")
     # print(X_after)
 
