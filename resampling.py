@@ -78,7 +78,7 @@ def get_under_sampling_ratio(labels):
 
 
 if __name__ == "__main__":
-    # Load trining data
+    # Load training data
     training_encoded_data_path = "./Dataset/encoded_training_data_5160_v2.json"
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
 

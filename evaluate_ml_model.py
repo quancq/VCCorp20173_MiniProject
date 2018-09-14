@@ -7,8 +7,9 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 
 if __name__ == "__main__":
-    test_data_path = "./Dataset/data_test_774.json"
+    test_data_path = "./Dataset/New_Data/data_test_774.json"
     model_dir = "./Model/2018-08-20_23-57-43"
+    # model_dir = "./Model/2018-09-14_17-11-23"
 
     # Load test data
     test_data = utils.load_data(test_data_path)
@@ -34,12 +35,12 @@ if __name__ == "__main__":
 
     # Evaluate
     metrics = {
-        "f1_macro": {"fn": f1_score, "params": {"average": "macro"}},
+        "f1_macro": {"fn": f1_score, "params": {"average": "macro", "labels": unique_labels}},
         # "f1_micro": {"fn": f1_score, "params": {"average": "micro"}},
         "accuracy": {"fn": accuracy_score},
-        "precision_macro": {"fn": precision_score, "params": {"average": "macro"}},
+        "precision_macro": {"fn": precision_score, "params": {"average": "macro", "labels": unique_labels}},
         # "precision_micro": {"fn": precision_score, "params": {"average": "micro"}},
-        "recall_macro": {"fn": recall_score, "params": {"average": "macro"}},
+        "recall_macro": {"fn": recall_score, "params": {"average": "macro", "labels": unique_labels}},
         # "recall_micro": {"fn": recall_score, "params": {"average": "micro"}}
     }
     is_predict_proba = False

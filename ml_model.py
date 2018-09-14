@@ -134,11 +134,11 @@ class EnsembleModel:
                 metric_params = metrics.get(metric_name).get("params")
                 # print("Score : {}, Params : {}".format(metric_name, metric_params))
                 # print(np.unique(y_test))
-                third_param = True if metric_name == "accuracy" else None
+                # third_param = True if metric_name == "accuracy" else None
                 if metric_params is None:
-                    value_score = metric_fn(y_test, y_pred, third_param)
+                    value_score = metric_fn(y_test, y_pred)
                 else:
-                    value_score = metric_fn(y_test, y_pred, third_param, **metric_params)
+                    value_score = metric_fn(y_test, y_pred, **metric_params)
                 row.append(value_score)
             result.append(row)
 
@@ -158,11 +158,11 @@ class EnsembleModel:
         for metric_name in columns:
             metric_fn = metrics.get(metric_name).get("fn")
             metric_params = metrics.get(metric_name).get("params")
-            third_param = True if metric_name == "accuracy" else None
+            # third_param = True if metric_name == "accuracy" else None
             if metric_params is None:
-                value_score = metric_fn(y_test, major_pred, third_param)
+                value_score = metric_fn(y_test, major_pred)
             else:
-                value_score = metric_fn(y_test, major_pred, third_param, **metric_params)
+                value_score = metric_fn(y_test, major_pred, **metric_params)
             row.append(value_score)
         result.append(row)
         unique_label = np.unique(np.concatenate((y_test, major_pred)))

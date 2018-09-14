@@ -194,18 +194,22 @@ class FeatureTransformer(BaseEstimator, TransformerMixin):
         return vstack(encoded_docs), np.array(labels)
 
 
+def generate_vocabulary(X_train, y_train):
+    min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
+    ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
+    ft.fit(X_train, y_train)
+    vocab_dir = "./Vocabulary/"
+    ft.save_vocab(vocab_dir)
+    ft.print_stats_vocab(10)
+
+
 if __name__ == "__main__":
-    training_data_path = "./Dataset/data_train_4386.json"
+    training_data_path = "./Dataset/New_Data/new_data_train_5951.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
     # Generate new vocabulary
-    # min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
-    # ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
-    # ft.fit(X_train, y_train)
-    # vocab_dir = "./Vocabulary/"
-    # ft.save_vocab(vocab_dir)
-    # ft.print_stats_vocab(10)
+    # generate_vocabulary(X_train, y_train)
 
     # Save encoded documents
     ft = FeatureTransformer()
@@ -214,7 +218,7 @@ if __name__ == "__main__":
     X_before = X_train_encoded[:5]
     y_before = y_train[-5:]
 
-    encoded_save_path = "./Dataset/encoded_training_data_{}.json".format(len(y_train))
+    encoded_save_path = "./Dataset/New_Data/encoded_training_data_{}.json".format(len(y_train))
     FeatureTransformer.save_encoded_data(X_train_encoded, y_train, encoded_save_path)
 
     X_train_encoded_new, y_train_new = FeatureTransformer.load_encoded_data(encoded_save_path)

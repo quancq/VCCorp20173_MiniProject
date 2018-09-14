@@ -22,7 +22,7 @@ from lightgbm import LGBMClassifier
 
 if __name__ == "__main__":
     # training_data_path = "./Dataset/data_train.json"
-    training_encoded_data_path = "./Dataset/encoded_training_data_4386.json"
+    training_encoded_data_path = "./Dataset/New_Data/encoded_training_data_5951.json"
     # training_data = utils.load_data(training_data_path)
     # X_train, y_train = utils.convert_orginal_data_to_list(training_data)
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
