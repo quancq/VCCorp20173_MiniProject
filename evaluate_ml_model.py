@@ -8,10 +8,9 @@ from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, 
 
 if __name__ == "__main__":
     test_data_path = "./Dataset/New_Data_v2/new_data_test_3569.json"
-    # model_dir = "./Model/2018-08-20_23-57-43"
-    # model_dir = "./Model/2018-09-14_17-11-23"
-    # model_dir = "./Model/2018-09-20_15-55-22"
-    model_dir = "./Model/2018-09-20_17-23-53"
+
+    # model_dir = "./Model/2018-09-21_16-51-25"
+    model_dir = "./Model/2018-09-21_17-34-17"
 
     # Load test data
     test_data = utils.load_data(test_data_path)

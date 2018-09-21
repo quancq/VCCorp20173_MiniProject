@@ -198,13 +198,13 @@ def generate_vocabulary(X_train, y_train):
     min_occurrences_of_token, max_labels_of_token = 3, NUM_LABELS * 0.5
     ft = FeatureTransformer(min_occurrences_of_token, max_labels_of_token)
     ft.fit(X_train, y_train)
-    vocab_dir = "./Vocabulary/New_v2/"
+    vocab_dir = "./Vocabulary/New_v4/"
     ft.save_vocab(vocab_dir)
     ft.print_stats_vocab(10)
 
 
 if __name__ == "__main__":
-    training_data_path = "./Dataset/New_Data_v2/new_data_train_6751.json"
+    training_data_path = "./Dataset/New_Data_v4/new_data_train_5119.json"
     training_data = utils.load_data(training_data_path)
     X_train, y_train = utils.convert_orginal_data_to_list(training_data)
 
@@ -212,11 +212,11 @@ if __name__ == "__main__":
     # generate_vocabulary(X_train, y_train)
 
     # Save encoded documents
-    # ft = FeatureTransformer()
-    # X_train_encoded = ft.fit_transform(X_train, y_train, vocab_path=VOCAB_PATH)
-    #
-    # encoded_save_path = "./Dataset/New_Data_v2/encoded_training_data_{}.json".format(len(y_train))
-    # FeatureTransformer.save_encoded_data(X_train_encoded, y_train, encoded_save_path)
+    ft = FeatureTransformer()
+    X_train_encoded = ft.fit_transform(X_train, y_train, vocab_path=VOCAB_PATH)
+
+    encoded_save_path = "./Dataset/New_Data_v4/encoded_training_data_{}.json".format(len(y_train))
+    FeatureTransformer.save_encoded_data(X_train_encoded, y_train, encoded_save_path)
 
     #
     # X_before = X_train_encoded[:5]

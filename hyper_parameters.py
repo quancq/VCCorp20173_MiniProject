@@ -5,10 +5,12 @@ MIN_WORD_LENGTH = 2
 NUM_LABELS = 20
 MIN_OCCURRENCES_TOKEN = 3
 
-SCORING = ["f1_macro", "accuracy"]
-CV = 2
+# SCORING = ["f1_macro", "accuracy"]
+SCORING = ["accuracy", "f1_macro"]
+CV = 4
 RANDOM_STATE = 7
-VOCAB_PATH = "./Vocabulary/New_v2/vocab_19149.csv"
+VOCAB_PATH = "./Vocabulary/New_v3/vocab_20191.csv"
+# VOCAB_PATH = "./Vocabulary/New_v4/vocab_16555.csv"
 
 MAP_LABEL_ID_TO_TEXT = {
     1: "Điện tử - Điện lạnh",

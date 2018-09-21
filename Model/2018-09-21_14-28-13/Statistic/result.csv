@@ -1,0 +1,9 @@
+Model,Hyper_Parameter,f1_macro,accuracy,Training_Time (Seconds)
+Logistic,{'C': 7.94},0.8389615318637773,0.8378773773108126,4.349456071853638
+LinearSVM,{'C': 0.42},0.8396877538758784,0.8416012767655273,1.3151493072509766
+LightGBM,"{'learning_rate': 0.2, 'max_depth': 50, 'n_estimators': 50}",0.8051661910978665,0.801835350445538,49.41773772239685
+MultiNB,{'alpha': 0.08},0.8468685198066994,0.8490490756749568,0.13855719566345215
+KernelSVM,"{'C': 0.8, 'gamma': 0.5, 'kernel': 'rbf'}",0.7721106696687724,0.7542226359888283,66.38452339172363
+RandomForest,"{'max_features': 0.8, 'class_weight': 'balanced', 'n_jobs': -1, 'max_depth': 75, 'n_estimators': 15}",0.737935058873495,0.7196435696236202,15.241734027862549
+KNN,"{'n_neighbors': 42, 'weights': 'distance'}",0.7682343562109927,0.7716451655805293,1.9957342147827148
+ExtraTree,"{'max_features': 0.5, 'class_weight': 'balanced', 'n_jobs': -1, 'max_depth': 70, 'n_estimators': 60}",0.7494559270166404,0.7233674690783349,40.31329822540283
