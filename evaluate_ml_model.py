@@ -2,14 +2,16 @@ import numpy as np
 import pandas as pd
 import utils, os
 from ml_model import EnsembleModel, VOCAB_PATH, SCORING
-from hyper_parameters import MAP_LABEL_ID_TO_TEXT, REMOVE_DOC_IDS, REMOVE_LABEL_IDS
+from hyper_parameters import MAP_LABEL_ID_TO_TEXT, REMOVE_DOC_IDS, REMOVE_LABEL_IDS, RETAIN_LABEL_IDS
 from sklearn.metrics import get_scorer, make_scorer, f1_score, precision_score, recall_score, accuracy_score, confusion_matrix
 
 
 if __name__ == "__main__":
-    test_data_path = "./Dataset/New_Data/data_test_774.json"
-    model_dir = "./Model/2018-08-20_23-57-43"
+    test_data_path = "./Dataset/New_Data_v2/new_data_test_3569.json"
+    # model_dir = "./Model/2018-08-20_23-57-43"
     # model_dir = "./Model/2018-09-14_17-11-23"
+    # model_dir = "./Model/2018-09-20_15-55-22"
+    model_dir = "./Model/2018-09-20_17-23-53"
 
     # Load test data
     test_data = utils.load_data(test_data_path)
@@ -17,6 +19,7 @@ if __name__ == "__main__":
     # Filter test data
     # test_data = utils.filter_data_by_attrib(test_data, "id", REMOVE_DOC_IDS)
     # test_data = utils.filter_data_by_attrib(test_data, "label", REMOVE_LABEL_IDS)
+    test_data = utils.filter_data_by_attrib(test_data, "label", RETAIN_LABEL_IDS, is_remove=False)
 
     df = pd.DataFrame(test_data)
     print("Head of test data:")
@@ -46,16 +49,13 @@ if __name__ == "__main__":
     is_predict_proba = False
     result_df, cf_mats = model.evaluate(X_test, y_test, metrics, is_predict_proba=is_predict_proba)
 
-    print("\nEvaluate result:")
-    print(result_df)
-
     # Save confusion matrix figure
     eval_save_dir = os.path.join(model_dir, "Evaluate_Proba" if is_predict_proba else "Evaluate")
     cm_save_dir = os.path.join(eval_save_dir, "Confusion_Matrix")
     utils.plot_multi_confusion_matrix(cf_mats, cm_save_dir)
 
     # Save result plot
-    utils.plot_multi_bar_with_annot(result_df, fig_save_dir=eval_save_dir, is_plot=False)
+    # utils.plot_multi_bar_with_annot(result_df, fig_save_dir=eval_save_dir, is_plot=False)
 
     result_save_path = os.path.join(eval_save_dir, "evaluate_{}.csv".format(len(y_test)))
     result_df.to_csv(result_save_path, index=False)
@@ -70,3 +70,7 @@ if __name__ == "__main__":
     save_path = os.path.join(eval_save_dir, "evaluate_data_{}_{}.csv".format(df.shape[0], utils.get_format_time_now()))
     df.to_csv(save_path, index=False)
     print("Save file compare y_true and y_pred to {} done".format(save_path))
+
+    print("\n=========================")
+    print("\nEvaluate result:")
+    print(result_df)

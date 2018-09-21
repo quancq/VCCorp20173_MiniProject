@@ -22,7 +22,7 @@ from lightgbm import LGBMClassifier
 
 if __name__ == "__main__":
     # training_data_path = "./Dataset/data_train.json"
-    training_encoded_data_path = "./Dataset/New_Data/encoded_training_data_5951.json"
+    training_encoded_data_path = "./Dataset/New_Data_v2/encoded_training_data_6751.json"
     # training_data = utils.load_data(training_data_path)
     # X_train, y_train = utils.convert_orginal_data_to_list(training_data)
     X_train, y_train = FeatureTransformer.load_encoded_data(training_encoded_data_path)
@@ -34,7 +34,8 @@ if __name__ == "__main__":
         MultinomialNB(),
         param_grid={
             # "alpha": [0.005]
-            "alpha": [0.0004]
+            # "alpha": [0.0004],
+            "alpha": [0.0344]
         },
         scoring=SCORING,
         refit=SCORING[0],
@@ -47,12 +48,12 @@ if __name__ == "__main__":
     rf_rs = RandomizedSearchCV(
         RandomForestClassifier(),
         param_distributions={
-            # "max_features": np.arange(0.6, 0.9, 0.1),
+            # "max_features": np.arange(0.85, 1, 0.05),
             # "n_estimators": [15],
             # # "min_samples_leaf": np.arange(2, 20, 5),
-            # "max_depth": np.arange(60, 80, 5),
+            # "max_depth": np.arange(70, 80, 5),
             # "class_weight": ["balanced"],
-            "max_features": [0.7],
+            "max_features": [0.9],
             "n_estimators": [15],
             # "min_samples_leaf": np.arange(2, 20, 5),
             "max_depth": [75],
@@ -104,32 +105,32 @@ if __name__ == "__main__":
     # model.add_model("AdaBoost", adb_rs)
 
     # 4. LightGBM
-    lgbm_rs = RandomizedSearchCV(
-        estimator=LGBMClassifier(),
-        param_distributions={
-            # "n_estimators": np.arange(40, 70, 10),
-            # "learning_rate": np.arange(0.15, 0.3, 0.05),
-            # "max_depth": np.arange(40, 60, 10),
-            "n_estimators": [50],
-            "learning_rate": [0.2],
-            "max_depth": [50],
-        },
-        n_iter=1,
-        scoring=SCORING,
-        refit=SCORING[0],
-        cv=CV,
-        return_train_score=False,
-        random_state=RANDOM_STATE
-    )
-    model.add_model("LightGBM", lgbm_rs)
+    # lgbm_rs = RandomizedSearchCV(
+    #     estimator=LGBMClassifier(),
+    #     param_distributions={
+    #         # "n_estimators": np.arange(40, 70, 10),
+    #         # "learning_rate": np.arange(0.15, 0.3, 0.05),
+    #         # "max_depth": np.arange(40, 60, 10),
+    #         "n_estimators": [50],
+    #         "learning_rate": [0.2],
+    #         "max_depth": [50],
+    #     },
+    #     n_iter=1,
+    #     scoring=SCORING,
+    #     refit=SCORING[0],
+    #     cv=CV,
+    #     return_train_score=False,
+    #     random_state=RANDOM_STATE
+    # )
+    # model.add_model("LightGBM", lgbm_rs)
 
     # 5. Linear SVM
     linear_svm_gs = GridSearchCV(
         estimator=LinearSVC(),
         param_grid={
-            # "C": [1.1845],
+            "C": [0.461],
             # "C": [1.43]
-            "C": [0.445]
+            # "C": [0.445]
             # "class_weight": ["balanced"],
         },
         scoring=SCORING,
@@ -143,8 +144,8 @@ if __name__ == "__main__":
     kernel_svm_rs = RandomizedSearchCV(
         estimator=SVC(),
         param_distributions={
-            # "C": [0.7],
-            # "gamma": [0.4],
+            # "C": np.arange(0.3, 0.8, 0.1),
+            # "gamma": np.arange(0.3, 0.8, 0.1),
             # "kernel": ["rbf"]
             "C": [0.7],
             "gamma": [0.6],
@@ -163,8 +164,8 @@ if __name__ == "__main__":
     lr_gs = GridSearchCV(
         estimator=LogisticRegression(),
         param_grid={
-            # "C": [1.83],
-            "C": [2.13]
+            "C": [7.656],
+            # "C": [2.13],
             # "class_weight": ["balanced"],
             # "n_jobs": [-1]
         },
@@ -179,7 +180,8 @@ if __name__ == "__main__":
     knn_rs = RandomizedSearchCV(
         estimator=KNeighborsClassifier(),
         param_distributions={
-            "n_neighbors": [5],
+            # "n_neighbors": [5],
+            "n_neighbors": [28],
             "weights": ["distance"],
         },
         n_iter=1,

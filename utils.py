@@ -343,14 +343,15 @@ class MyEncoder(json.JSONEncoder):
             return super(MyEncoder, self).default(obj)
 
 
-def filter_data_by_attrib(data, attrib, remove_ids):
-    print("Before remove {} ({}), data size = {}".format(attrib, remove_ids, len(data)))
+def filter_data_by_attrib(data, attrib, ids, is_remove=True):
+    print("Before filter {} ({}), data size = {}".format(attrib, ids, len(data)))
     filtered_data = []
     for data_point in data:
-        if data_point[attrib] not in remove_ids:
+        is_contain = data_point[attrib] in ids
+        if (is_remove and not is_contain) or (not is_remove and is_contain):
             filtered_data.append(data_point)
 
-    print("After remove {} ({}), data size = {}".format(attrib, remove_ids, len(filtered_data)))
+    print("After filter {} ({}), data size = {}".format(attrib, ids, len(filtered_data)))
     return filtered_data
 
 
